@@ -3,3 +3,4 @@ result-*
 .direnv
 .env
 hardware-configuration.nix # 可选：如果你有隐私洁癖，可以忽略硬件配置
+alias.txt

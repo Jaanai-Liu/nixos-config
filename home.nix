@@ -120,8 +120,8 @@
   # 3. Vim 配置 (替代 .vimrc)
   programs.vim = {
     enable = true;
+    # package = pkgs.vim-full; 
     defaultEditor = true; # 会自动设置 EDITOR=vim
-
     # 使用 Nix 管理插件，替代 vim-plug 
     plugins = with pkgs.vimPlugins; [
       nerdtree                 # Preservim/nerdtree
@@ -134,6 +134,7 @@
 
     # 将 vimrc 中的设置直接贴在这里
     extraConfig = ''
+      set clipboard=unnamedplus
       set nocompatible
       filetype plugin indent on
       syntax on
