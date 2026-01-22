@@ -114,6 +114,7 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  environment.gnome.excludePackages = [ pkgs.epiphany ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -125,12 +126,37 @@
   #  wget
     wget
     # clash-verge-rev
-    git
+    # git
     fastfetch
     htop
     vim-full
     pkgs.fcitx5-material-color
   ];
+
+
+  # fonts
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans       # 谷歌 Noto 黑体 (最重要，覆盖简繁日韩)
+      noto-fonts-cjk-serif      # 谷歌 Noto 宋体
+      wqy_zenhei                # 文泉驿正黑 (老牌好用的开源字体)
+      wqy_microhei              # 文泉驿微米黑
+      # sarasa-gothic           # 更纱黑体 (代码编程很好看，可选)
+      # source-han-sans         # 思源黑体 (如果 Noto 不够用可以加上这个)
+    ];
+
+    #以此配置默认字体，确保浏览器优先使用中文字体
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Noto Serif CJK SC" "Noto Serif" ];
+        sansSerif = [ "Noto Sans CJK SC" "Noto Sans" ];
+        monospace = [ "Noto Sans Mono CJK SC" "Noto Sans Mono" ];
+      };
+    };
+  };
+
 
   #security.wrappers.clash-verge = {
   #  owner = "root";
@@ -147,9 +173,10 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
   programs.gamemode.enable = true;  # 启用 GameMode
-  environment.sessionVariables = {
-    STEAM_FORCE_DESKTOPUI_SCALING = "1.5";  # 可选：调整 UI 缩放
-  };
+  
+  #environment.sessionVariables = {
+  #  STEAM_FORCE_DESKTOPUI_SCALING = "1.5";  # 可选：调整 UI 缩放
+  #};
 
   i18n.inputMethod = {
     enable = true;
