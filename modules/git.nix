@@ -25,7 +25,7 @@
         # editor = "vim";  # 你甚至可以在这设置默认编辑器
       };
 
-      aliases = {
+      alias = {
         ci = "commit";
         co = "checkout";
         st = "status";
