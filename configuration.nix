@@ -136,7 +136,8 @@
     htop
     vim-full
     pkgs.fcitx5-material-color
-    gnomeExtensions.hibernate-status-button
+    # gnomeExtensions.hibernate-status-button
+    gnomeExtensions.power-off-options
   ];
 
 
