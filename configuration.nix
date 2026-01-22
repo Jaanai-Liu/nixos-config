@@ -62,6 +62,11 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # Hibernate 休眠
+  boot.resumeDevice = "/dev/disk/by-uuid/8b14124f-e4c1-4f9d-9e9d-af852e1bc152";
+  # 电源管理
+  powerManagement.enable = true;
+
   programs.niri.enable = true;
 
   # Configure keymap in X11
@@ -131,6 +136,7 @@
     htop
     vim-full
     pkgs.fcitx5-material-color
+    gnomeExtensions.hibernate-status-button
   ];
 
 
