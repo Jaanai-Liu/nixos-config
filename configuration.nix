@@ -62,6 +62,8 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  programs.niri.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -122,12 +124,10 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     wget
-    # git
-    # vim
     # clash-verge-rev
+    git
     fastfetch
     htop
-    # neovim 
     vim-full
     pkgs.fcitx5-material-color
   ];

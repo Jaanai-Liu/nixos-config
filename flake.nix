@@ -11,6 +11,8 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";  # 使用相同的 nixpkgs
     };
+
+    # niri.url = "github:YaLTeR/niri";
   };
 
 
@@ -23,9 +25,13 @@
     nixosConfigurations = {
       LiuZheng = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+
+        # 把 inputs 传给所有模块，这样我们在 configuration.nix 里也能用
+        # specialArgs = { inherit inputs; };
+
         modules = [
           ./configuration.nix
-
+          
           # 将 home-manager 配置为 nixos 的一个 module
           # 这样在 nixos-rebuild switch 时，home-manager 配置也会被自动部署
           home-manager.nixosModules.home-manager
@@ -37,11 +43,10 @@
             home-manager.users.zheng = import ./home.nix;
 
             # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
-            # home-manager.extraSpecialArgs = inputs;
+            # home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
       };
     };
-
   };
 }
