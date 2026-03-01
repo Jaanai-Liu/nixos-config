@@ -16,7 +16,12 @@
   };
 
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
+      # 1. 在这里导入你手写的lib文件夹，并实例化为mylib
+      # 传入nixpkgs自带的lib，因为你的default.nix里写了 { lib, ... }:
+      mylib = import ./lib { inherit (nixpkgs) lib; };
+    in{
 
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
@@ -27,7 +32,7 @@
         system = "x86_64-linux";
 
         # 把 inputs 传给所有模块，这样我们在 configuration.nix 里也能用
-        # specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs mylib; };
 
         modules = [
           ./configuration.nix

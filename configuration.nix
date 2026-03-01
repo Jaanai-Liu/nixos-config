@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules
     ];
 
   # Bootloader.
@@ -132,8 +133,8 @@
     wget
     # clash-verge-rev
     # git
-    fastfetch
-    htop
+    #fastfetch
+    #htop
     vim-full
     pkgs.fcitx5-material-color
     # gnomeExtensions.hibernate-status-button

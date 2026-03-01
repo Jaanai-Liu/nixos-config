@@ -38,6 +38,53 @@
       export GTK_IM_MODULE=fcitx
       export QT_IM_MODULE=fcitx
       export XMODIFIERS="@im=fcitx"
+
+      # ma
+      #function ma() {
+      #  if [ -z "$1" ]; then
+      #    echo "用法：ma <包名1> [包名2] ..."
+      #    return 1
+      #  fi
+      #    fixchromecmd="nix shell"
+      #    for arg in "$@"; DO
+      #      CMD="$CMD nixpkgs#$arg"
+      #    done
+      #    echo "正在进入Nix环境：$cmd"
+      #    eval "$cmd"
+      #}
+      function ma() {
+        if [ -z "$1" ]; then
+          echo "用法：ma <包名1> [包名2] ..."
+          return 1
+        fi # <- 增加了闭合的 fi
+
+        local cmd="nix shell" # 统一变量名并初始化
+        for arg in "$@"; do   # <- 改为了小写的 do
+          cmd="$cmd nixpkgs#$arg"
+        done
+        
+        echo "正在进入Nix环境：$cmd"
+        eval "$cmd"
+      }
+
+      function mav() {
+        if [ -z "$1" ]; then
+          echo "用法: mav <搜索关键词>"
+          return 1
+        fi
+
+        echo "🔍 正在Nixpkgs库中搜索'$1'..."
+        echo "提示：第一次搜索可能需要下载缓存索引，请耐心等待..."
+        echo "---------------------------------------------------"
+
+        # nix search的输出传递给grep，再传递给sed
+        nix search nixpkgs "$1" 2>/dev/null |
+        grep "^* " |
+        sed -E 's/^\* (legacyPackages\.[^.]+\.|nixpkgs#)//'
+    
+        echo "---------------------------------------------------"
+        echo "👉 使用'ma <名字>'即可使用对应版本"
+      }
       
       # 自定义函数
       function cd() {

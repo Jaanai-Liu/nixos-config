@@ -3,15 +3,18 @@
 
 {
   imports = [
-    ./modules/git.nix
-    ./modules/vim.nix
-    ./modules/zsh.nix    
-    ./modules/vlc.nix
-    
-    ./modules/alist.nix
-    
-    ./modules/niri.nix
-    ./modules/kitty.nix
+    ./home/git.nix
+    ./home/vim.nix
+    ./home/zsh.nix    
+    ./home/vlc.nix
+    ./home/alist.nix
+    ./home/niri.nix
+    ./home/kitty.nix
+    ./home/nnn.nix
+    ./home/yazi.nix
+    ./home/dev-tools.nix
+
+    # ./modules/networking
   ];
   # 注意修改这里的用户名与用户目录
   home.username = "zheng";
@@ -22,9 +25,12 @@
     fastfetch
     tmux
     nodejs
-    htop
+    #htop
+    btop
 
     micromamba
+
+    localsend
 
     anydesk
 
@@ -53,7 +59,7 @@
 
     wechat
     wpsoffice-cn
-    vscode
+    # vscode
     obsidian
 
 
