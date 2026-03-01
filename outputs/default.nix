@@ -1,38 +1,14 @@
-{ self, nixpkgs, home-manager, ... }@inputs:
-    let
-      # 1. 在这里导入你手写的lib文件夹，并实例化为mylib
-      # 传入nixpkgs自带的lib，因为你的default.nix里写了 { lib, ... }:
-      mylib = import ../lib { inherit (nixpkgs) lib; };
-    in{
-
-    # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-    # packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
-    nixosConfigurations = {
-      LiuZheng = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        # 把 inputs 传给所有模块，这样我们在 configuration.nix 里也能用
-        specialArgs = { inherit inputs mylib; };
-
-        modules = [
-          ../configuration.nix
-          
-          # 将 home-manager 配置为 nixos 的一个 module
-          # 这样在 nixos-rebuild switch 时，home-manager 配置也会被自动部署
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            # 这里的 import 函数在前面 Nix 语法中介绍过了，不再赘述
-            home-manager.users.zheng = import ../home.nix;
-
-            # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
-            home-manager.extraSpecialArgs = { inherit inputs mylib; };
-          }
-        ];
-      };
-    };
-  }
+# outputs/default.nix
+# inputs:
+{ nixpkgs, home-manager, ... }@inputs:
+let
+  inherit (inputs) self nixpkgs home-manager;
+  mylib = import ../lib { inherit (nixpkgs) lib; };
+  
+  # 把所有工具打包成一个通用参数包
+  args = { inherit inputs mylib nixpkgs home-manager; };
+in
+{
+  # 将x86_64架构的装机任务，全部外包给x86_64-linux文件夹处理
+  nixosConfigurations = import ./x86_64-linux args;
+}

@@ -3,19 +3,7 @@
 
 {
   imports = [
-    #./home/git.nix
-    #./home/vim.nix
-    #./home/zsh.nix    
-    #./home/vlc.nix
-    #./home/alist.nix
-    #./home/niri.nix
-    #./home/kitty.nix
-    #./home/nnn.nix
-    #./home/yazi.nix
-    #./home/dev-tools.nix
-    ./home
-
-    # ./modules/networking
+    ../../home
   ];
   # 注意修改这里的用户名与用户目录
   home.username = "zheng";
