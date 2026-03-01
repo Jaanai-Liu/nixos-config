@@ -1,6 +1,9 @@
 # modules/vim.nix
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs;[
+    nodejs
+  ];
   programs.vim = {
     enable = true;
     # package = pkgs.vim-full; 

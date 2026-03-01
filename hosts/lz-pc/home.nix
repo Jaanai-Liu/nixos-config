@@ -11,33 +11,6 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs;[
-    fastfetch
-    tmux
-    nodejs
-    #htop
-    btop
-
-    micromamba
-
-    localsend
-
-    anydesk
-
-    # media
-    gimp
-    darktable
-    kdePackages.kdenlive
-
-    # video
-    # vlc
-    obs-studio
-
-    clash-verge-rev
-
-    alist
-
-    # thefuck
-
     # gnome Extension
     # gnome-extensions-app
     gnome-extension-manager
@@ -45,12 +18,6 @@
     gnomeExtensions.appindicator
     # gnomeExtensions.kimpanel
     gnomeExtensions.clipboard-indicator
-
-    wechat
-    wpsoffice-cn
-    # vscode
-    obsidian
-
 
     # niri extension
     #(nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "DroidSansMono" ]; })

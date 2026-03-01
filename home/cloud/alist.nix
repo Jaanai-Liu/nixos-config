@@ -1,6 +1,10 @@
 # modules/alist.nix
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    alist
+  ];
+
   # 定义alist后台服务
   systemd.user.services.alist = {
     Unit = {

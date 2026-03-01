@@ -2,8 +2,6 @@
 {
   home.packages = with pkgs; [
     vscode
+    micromamba
   ];
-  #programs.vscode = {
-  #  enable = true;
-  #};
 }

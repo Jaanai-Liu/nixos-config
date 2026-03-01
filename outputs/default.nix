@@ -9,6 +9,5 @@ let
   args = { inherit inputs mylib nixpkgs home-manager; };
 in
 {
-  # 将x86_64架构的装机任务，全部外包给x86_64-linux文件夹处理
   nixosConfigurations = import ./x86_64-linux args;
 }
