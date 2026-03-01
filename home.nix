@@ -3,16 +3,17 @@
 
 {
   imports = [
-    ./home/git.nix
-    ./home/vim.nix
-    ./home/zsh.nix    
-    ./home/vlc.nix
-    ./home/alist.nix
-    ./home/niri.nix
-    ./home/kitty.nix
-    ./home/nnn.nix
-    ./home/yazi.nix
-    ./home/dev-tools.nix
+    #./home/git.nix
+    #./home/vim.nix
+    #./home/zsh.nix    
+    #./home/vlc.nix
+    #./home/alist.nix
+    #./home/niri.nix
+    #./home/kitty.nix
+    #./home/nnn.nix
+    #./home/yazi.nix
+    #./home/dev-tools.nix
+    ./home
 
     # ./modules/networking
   ];

@@ -48,7 +48,7 @@
             home-manager.users.zheng = import ./home.nix;
 
             # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
-            # home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = { inherit inputs mylib; };
           }
         ];
       };
