@@ -24,11 +24,10 @@
       g = "gvim";
       c = "code";
       b = "cd ..";
-      ge = "gedit";
       py = "python3";
       # 注意：conda activate 最好在 initExtra 中处理，或直接在 shell 中使用
       mlp = "conda activate mlp";
-      fixchrome = "pkill -f chrome; rm -rf ~/.config/google-chrome/Singleton*";
+      # fixchrome = "pkill -f chrome; rm -rf ~/.config/google-chrome/Singleton*";
     };
 
     # 这里放入所有原本 zshrc 中无法标准化的脚本 (Conda, 函数, export 等)
@@ -39,19 +38,6 @@
       export QT_IM_MODULE=fcitx
       export XMODIFIERS="@im=fcitx"
 
-      # ma
-      #function ma() {
-      #  if [ -z "$1" ]; then
-      #    echo "用法：ma <包名1> [包名2] ..."
-      #    return 1
-      #  fi
-      #    fixchromecmd="nix shell"
-      #    for arg in "$@"; DO
-      #      CMD="$CMD nixpkgs#$arg"
-      #    done
-      #    echo "正在进入Nix环境：$cmd"
-      #    eval "$cmd"
-      #}
       function ma() {
         if [ -z "$1" ]; then
           echo "用法：ma <包名1> [包名2] ..."

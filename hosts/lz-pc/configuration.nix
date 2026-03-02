@@ -2,14 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, myvars, mysecrets, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules
+      ../../secrets/nixos.nix
     ];
+  modules.secrets.desktop.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -108,15 +110,27 @@
 
   programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.zheng = {
+  users.users.${myvars.username} = {
+    # we have to use initialHashedPassword here when using tmpfs for /
+    inherit (myvars) initialHashedPassword;
+    home = "/home/${myvars.username}";
     isNormalUser = true;
-    description = "lz-pc";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = myvars.userfullname;
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
     #  thunderbird
     ];
+    openssh.authorizedKeys.keys = myvars.sshAuthorizedKeys;
   };
+
+  # root's ssh key are mainly used for remote deployment
+  users.users.root = {
+    inherit (myvars) initialHashedPassword;
+    openssh.authorizedKeys.keys = config.users.users."${myvars.username}".openssh.authorizedKeys.keys;
+  };
+
+
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -174,13 +188,6 @@
   #};
   # networking.firewall.checkReversePath = "loose";
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
-  programs.gamemode.enable = true;  # 启用 GameMode
   
   #environment.sessionVariables = {
   #  STEAM_FORCE_DESKTOPUI_SCALING = "1.5";  # 可选：调整 UI 缩放
@@ -210,9 +217,9 @@
     XMODIFIERS = "@im=fcitx";
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "alist-3.45.0"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "alist-3.45.0"
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -225,7 +232,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
