@@ -43,7 +43,7 @@ in
       #   ~/.steam/root        - A symlink to ~/.local/share/Steam
       #   ~/.steam             - Some Symlinks & user info
       enable = true;
-      package = pkgs-x64.steam;
+      package = pkgs.steam;
       # https://github.com/ValveSoftware/gamescope
       # Run a GameScope driven Steam session from your display-manager
       # fix resolution upscaling and stretched aspect ratios

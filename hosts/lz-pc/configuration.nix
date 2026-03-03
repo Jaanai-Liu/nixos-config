@@ -10,8 +10,10 @@
       ./hardware-configuration.nix
       ../../modules
       ../../secrets/nixos.nix
+      ../../modules/desktop/gaming.nix
     ];
   modules.secrets.desktop.enable = true;
+  modules.desktop.gaming.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
