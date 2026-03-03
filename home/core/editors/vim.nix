@@ -3,6 +3,8 @@
 {
   home.packages = with pkgs;[
     nodejs
+    font-awesome
+    font-awesome_6
   ];
   programs.vim = {
     enable = true;

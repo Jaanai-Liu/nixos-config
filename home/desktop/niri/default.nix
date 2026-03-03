@@ -123,9 +123,9 @@
         }
         default-column-width { proportion 0.5; }
         focus-ring {
-            width 4
-            active-color "#7fc8ff"
-            inactive-color "#505050"
+            width 2
+            active-color "#7fc8ff88"
+            inactive-color "#50505044"
         }
     }
 
@@ -139,42 +139,53 @@
         clip-to-geometry true
     }
 
+
     binds {
+        // --- 1. 应用启动 ---
         Mod+Return { spawn "kitty"; }
         Alt+Space { spawn "fuzzel"; }
         Ctrl+Shift+L { spawn "swaylock"; }
         Mod+Shift+E { quit; }
         Mod+Q { close-window; }
+
+        // --- 2. 桌面(Workspace)切换：上下键 ---
+        Mod+Up          { focus-workspace-up; }
+        Mod+Down        { focus-workspace-down; }
+        Mod+Shift+Up    { move-column-to-workspace-up; }
+        Mod+Shift+Down  { move-column-to-workspace-down; }
+        Mod+Tab         { toggle-overview; }
+
+        // --- 3. 窗口焦点切换 (保持 Vim 风格) ---
         Mod+Left  { focus-column-left; }
-        Mod+Down  { focus-window-down; }
-        Mod+Up    { focus-window-up; }
         Mod+Right { focus-column-right; }
         Mod+H     { focus-column-left; }
+        Mod+L     { focus-column-right; }
         Mod+J     { focus-window-down; }
         Mod+K     { focus-window-up; }
-        Mod+L     { focus-column-right; }
-        Mod+Shift+Left  { move-column-left; }
-        Mod+Shift+Down  { move-window-down; }
-        Mod+Shift+Up    { move-window-up; }
-        Mod+Shift+Right { move-column-right; }
-        Mod+Shift+H     { move-column-left; }
-        Mod+Shift+J     { move-window-down; }
-        Mod+Shift+K     { move-window-up; }
-        Mod+Shift+L     { move-column-right; }
+
+        // --- 4. 窗口快速切换 (Alt+Tab) ---
+        // 绑定为切换到上一个活跃窗口
+        Alt+Tab { focus-window-previous; }
+
+        // --- 5. 布局调整与“缩放预览” (重点) ---
         Mod+Minus { set-column-width "-10%"; }
         Mod+Equal { set-column-width "+10%"; }
         Mod+R { switch-preset-column-width; }
         Mod+F { maximize-column; }
         Mod+Shift+F { fullscreen-window; }
         Mod+C { center-column; }
+        
+        // --- 6. 多媒体与截图 ---
         XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
         XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
         XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
         XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
         XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+        
         Print { screenshot; }
         Ctrl+Print { screenshot-screen; }
         Alt+Print { screenshot-window; }
     }
-  '';
+
+    '';
 }
