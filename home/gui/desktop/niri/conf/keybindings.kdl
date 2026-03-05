@@ -19,11 +19,12 @@ binds {
     Mod+Return { spawn "kitty"; }
 
     // Launcher
-    Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D { spawn "noctalia-shell" "ipc" "call" "ltauncher" "toggle"; }
+    // Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Alt+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     XF86Search { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
 
-    Alt+Space { spawn "fuzzel"; }
+    // Alt+Space { spawn "fuzzel"; }
 
     // Locker
     CTRL+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
@@ -177,6 +178,7 @@ binds {
 
     // Switches focus between the current and the previous workspace.
     // Mod+Tab { focus-workspace-previous; }
+    Mod+Tab { toggle-overview; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
