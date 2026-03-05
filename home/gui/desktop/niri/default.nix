@@ -44,6 +44,8 @@ in
     executable = true;
     text = ''
       #!/bin/sh
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri
+      
       # 尝试清理旧的会话
       systemctl --user is-active niri.service && systemctl --user stop niri.service
       # 启动正式的 niri 会话
