@@ -15,7 +15,7 @@
       text = ''
         Vertical Candidate List=False
         WheelForPaging=True
-        Font="LXGW WenKai 12"
+        Font="Noto Sans CJK SC 10"
         Theme=catppuccin-macchiato-mauve
       '';
       force = true;

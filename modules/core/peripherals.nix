@@ -53,4 +53,6 @@
   services.power-profiles-daemon.enable= true;
   # 电池状态监听服务（读取百分比、充电状态）
   services.upower.enable= true;
+
+  services.envfs.enable = true;
 }
