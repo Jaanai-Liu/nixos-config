@@ -1,54 +1,68 @@
-<h2 align="center">:snowflake: LiuZheng's NixOS Config :snowflake:</h2>
+# ❄️ LiuZheng's NixOS Config
+
+[![简体中文](https://img.shields.io/badge/语言-简体中文-fed.svg?style=flat-square)](README_zh.md)
+
+---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="400" />
+<img src="[https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png](https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png)" width="400" />
 </p>
 
-<p align="center">
-  <a href="https://github.com/Jaanai-Liu/nixos-config/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/Jaanai-Liu/nixos-config?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
-    <a href="https://nixos.org/">
-        <img src="https://img.shields.io/badge/NixOS-25.11-informational.svg?style=for-the-badge&logo=nixos&color=F2CDCD&logoColor=D9E0EE&labelColor=302D41"></a>
-</p>
 
-> This repository contains my personal NixOS configurations (featuring Niri, home-manager, and Agenix). **I built and modularized the entire structure myself, with huge inspiration and reference from [Ryan's NixOS & Flakes Book](https://github.com/ryan4yin/nixos-and-flakes-book) and his [personal dotfiles](https://github.com/ryan4yin/nix-config).** Please note that as the config grows, **it will be quite complex for beginners to read.**
+> [!NOTE]
+> This repository contains my personal, modularized NixOS configurations built with **Niri**, **Home-manager**, and **Agenix**. It is heavily inspired by [Ryan's NixOS & Flakes Book](https://github.com/ryan4yin/nixos-and-flakes-book) and his [personal dotfiles](https://github.com/ryan4yin/nix-config).
 
 ## 💻 Hardware Overview
 
-* **Host (`lz-pc`)**: PC(Intel Core: i5-12400F AMD Radeon GPU: 9060XT)
+| Host | Type | Specifications | Status |
+| --- | --- | --- | --- |
+| **`lz-pc`** | Desktop | Intel i5-12400F | AMD Radeon GPU |
+| **`lz-laptop`** | Laptop | AMD Ryzen 7 7840HS | *Work in Progress* |
 
-## 🧩 Components
+## 🧩 Software Stack
 
-| Category | Software / Configuration |
-| :--- | :--- |
-| **Window Manager** | [Niri](https://github.com/YaLTeR/niri) (Wayland) |
-| **Status Bar & Shell** | [noctalia-shell](https://github.com/noctalia-dev/noctalia-shell) |
-| **Terminal Emulator** | [Kitty](https://github.com/kovidgoyal/kitty) |
-| **Text Editor & IDE** | [Neovim](https://github.com/neovim/neovim) + [VSCode](https://code.visualstudio.com/) ([NerdFonts](https://github.com/ryanoasis/nerd-fonts)) |
-| **Idle & Power Management** | [hypridle](https://github.com/hyprwm/hypridle) (5min/10min/15min stepped suspend) |
-| **Lock Screen** | [swaylock-effects](https://github.com/mortie/swaylock-effects) (Blur & Fade-in) |
-| **Display Manager** | [tuigreet](https://github.com/apognu/tuigreet) |
-| **Shell Environment** | [zsh](https://www.zsh.org/) + [Starship](https://starship.rs/) |
-| **Input Method** | [Fcitx5](https://github.com/fcitx/fcitx5) + [rime](https://rime.im/) |
-| **System Monitor** | [Btop](https://github.com/aristocratos/btop) |
-| **File Manager** | [Yazi](https://github.com/sxyazi/yazi) |
-| **Note-Taking** | [Obsidian](https://obsidian.md/) |
-| **Cloud Storage Mount** | [Alist](https://github.com/alist-org/alist) (Locked via Flake) |
+I use the **Catppuccin Macchiato** color palette across most applications for a consistent, aesthetic experience.
 
-🎨 **Wallpapers**: [My Wallpapers Collection](https://github.com/Jaanai-Liu/nixos-config/tree/main/wallpapers)
+| Category | Component |
+| --- | --- |
+| **Window Manager** | [Niri](https://github.com/YaLTeR/niri) (Scrollable Tiling Wayland Compositor) |
+| **Status Bar/Shell** | [Noctalia-shell](https://github.com/noctalia-dev/noctalia-shell) |
+| **Terminal** | [Kitty](https://github.com/kovidgoyal/kitty) |
+| **Editor** | [Neovim](https://github.com/neovim/neovim) + [VS Code](https://code.visualstudio.com/) + [Vim](https://www.vim.org/) |
+| **Shell** | [Zsh](https://www.zsh.org/) + [Starship](https://starship.rs/) Prompt |
+| **Input Method** | [Fcitx5](https://github.com/fcitx/fcitx5) with [Rime](https://rime.im/) |
+| **File Manager** | [Yazi](https://github.com/sxyazi/yazi) & [nnn](https://github.com/jarun/nnn) |
+| **Power/Idle** | [Hypridle](https://github.com/hyprwm/hypridle) + [Swaylock-effects](https://github.com/mortie/swaylock-effects) |
+| **Productivity** | [Obsidian](https://obsidian.md/) & [WPS Office](https://www.wps.cn/) |
+| **Secrets** | [Agenix](https://github.com/ryantm/agenix) |
 
-## 🔒 Secrets Management
+---
 
-See [./secrets](https://www.google.com/search?q=./secrets) for details (Managed by Agenix).
+## 🚀 Deployment
 
-## 🚀 How to Deploy this Flake?
+### ⚠️ Critical Warnings
 
-> :red_circle: **IMPORTANT**: **You should NOT deploy this flake directly on your machine :exclamation: It will not succeed.** > This flake contains specific hardware configurations (such as CPU microcode for Intel i5-12400F, AMD Radeon GPU 9060XT, and specific disk mount points) along with encrypted secrets via Agenix. You may use this repo as a reference to build your own configuration.
+* **Do not deploy this flake directly.** It contains hardware-specific configurations (CPU microcode, GPU drivers) and encrypted secrets managed by Agenix that require my private keys.
+* **Pre-deployment requirement**: You **must** modify the `output.kdl` configuration within the Niri host directory to match your specific monitor setup before switching.
+
+### Command
+
+To deploy or update the configuration for the desktop host:
 
 ```bash
-# Deploy the configuration based on the hostname (lz-pc)
 sudo nixos-rebuild switch --flake .#lz-pc
 
 ```
 
-> ⚠️**注意**：部署前需要修改hosts路径下的niri文件配置output.kdl！
+## 📁 Repository Structure
+
+* `hosts/`: Machine-specific configurations and hardware definitions.
+* `modules/`: Reusable NixOS and Home-manager modules.
+* `secrets/`: Encrypted system secrets (Wi-Fi passwords, API keys, etc.).
+* `wallpapers/`: My curated [wallpaper collection](https://github.com/Jaanai-Liu/nixos-config/tree/main/wallpapers).
+
+---
+
+**Maintained by Jaanai-Liu** *Looking forward to the next chapter in Shanghai.*
+
+---
