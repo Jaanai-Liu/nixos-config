@@ -1,7 +1,4 @@
 { pkgs, ... }:
-# let
-#   lock_wallpaper = builtins.path { path = ../../../wallpapers/LockWallpapers/75778903_p0.jpg; };
-# in
 {
   programs.swaylock = {
     enable = true;
@@ -36,7 +33,6 @@
       datestr = "%a, %B %e";
       timestr = "%I:%M %p";
       # ignore-empty-password = true;
-      # image = "${lock_wallpaper}";
       image = "/etc/wallpapers/meihua.JPG";
 
       # grace=2

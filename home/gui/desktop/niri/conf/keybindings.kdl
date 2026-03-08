@@ -28,6 +28,7 @@ binds {
 
     // Locker
     Mod+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    // Mod+L { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

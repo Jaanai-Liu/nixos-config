@@ -4,6 +4,6 @@
     # vscode
     micromamba
     antigravity
-    # android-studio
+    android-studio
   ];
 }
