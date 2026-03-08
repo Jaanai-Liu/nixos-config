@@ -2,6 +2,10 @@
 {
   home.packages = with pkgs; [
     firefox
-    # google-chrome
+    google-chrome
   ];
+
+  home.sessionVariables = {
+    BROWSER = "firefox";
+  };
 }

@@ -9,7 +9,22 @@
     };
     "mozc/config1.db".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home/linux/gui/base/fcitx5/mozc-config1.db";
+
+    # theme
+    "fcitx5/conf/classicui.conf" = {
+      text = ''
+        Vertical Candidate List=False
+        WheelForPaging=True
+        Font="LXGW WenKai 12"
+        Theme=catppuccin-macchiato-mauve
+      '';
+      force = true;
+    };
   };
+
+  home.packages = with pkgs; [
+    lxgw-wenkai
+  ];
 
   i18n.inputMethod = {
     enable = true;
@@ -32,6 +47,7 @@
       fcitx5-hangul
 
       # fcitx5-material-color
+      catppuccin-fcitx5
     ];
   };
 }
