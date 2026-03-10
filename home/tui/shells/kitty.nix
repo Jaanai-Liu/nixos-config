@@ -20,7 +20,8 @@
     settings = {
       hide_window_decorations = "yes";
       background_opacity = "0.93";
-      background_blur = 1;
+      active_background_opacity = "0.93";
+      background_blur = 0;
       enable_audio_bell = false;
       tab_bar_edge = "top";
       # 保持你那个无敌的Shell启动逻辑，确保 Zsh 环境变量不丢
