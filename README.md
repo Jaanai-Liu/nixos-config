@@ -61,8 +61,3 @@ sudo nixos-rebuild switch --flake .#lz-pc
 * `secrets/`: Encrypted system secrets (Wi-Fi passwords, API keys, etc.).
 * `wallpapers/`: My curated [wallpaper collection](https://github.com/Jaanai-Liu/nixos-config/tree/main/wallpapers).
 
----
-
-**Maintained by Jaanai-Liu** *Looking forward to the next chapter in Shanghai.*
-
----
