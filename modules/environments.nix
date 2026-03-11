@@ -31,6 +31,13 @@
     # htop
     
     tree
+
+    # archives
+    zip
+    xz
+    zstd
+    unzipNLS
+    p7zip
     
 
     # system tools

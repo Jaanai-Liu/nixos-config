@@ -9,6 +9,7 @@
     gdu             # 磁盘占用分析(AstroNvim界面依赖)
     wl-clipboard    # Wayland剪贴板支持(实现Neovim与系统复制粘贴互通)
     stylua          # Lua代码格式化(AstroNvim配置文件需要)
+    fd
 
     # 2.Nix系统级配置开发支持
     nil
@@ -18,5 +19,11 @@
     # Markdown
     marksman
     glow
+
+    cargo         # 必须：用于安装和编译 Rust 插件
+    rustc         # 必须：Rust 编译器本体
+    rust-analyzer
+    rustfmt       # 可选：格式化 Rust 代码
+    clippy
   ];
 }

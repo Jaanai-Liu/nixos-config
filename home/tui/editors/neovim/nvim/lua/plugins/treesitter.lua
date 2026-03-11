@@ -17,7 +17,7 @@ return {
         node_decremental = "<bs>", -- Backspace
       },
     }
-    opts.ignore_install = { "gotmpl", "wing" }
+    opts.ignore_install = { "gotmpl", "wing", "ipkg" }
 
     -- add more things to the ensure_installed table protecting against community packs modifying it
     -- https://github.com/nvim-treesitter/nvim-treesitter/tree/master
