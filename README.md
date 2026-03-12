@@ -59,5 +59,5 @@ sudo nixos-rebuild switch --flake .#lz-pc
 * `hosts/`: Machine-specific configurations and hardware definitions.
 * `modules/`: Reusable NixOS and Home-manager modules.
 * `secrets/`: Encrypted system secrets (Wi-Fi passwords, API keys, etc.).
-* `wallpapers/`: My curated [wallpaper collection](https://github.com/Jaanai-Liu/nixos-config/tree/main/wallpapers).
+* `wallpapers/`: My curated [wallpaper collection](https://github.com/Jaanai-Liu/nix-config/tree/main/wallpapers).
 

@@ -35,7 +35,7 @@
 | **办公笔记** | [Obsidian](https://obsidian.md/) + [WPS Office](https://www.wps.cn/) |
 | **密钥管理** | [Agenix](https://github.com/ryantm/agenix) |
 
-🎨 **壁纸收藏**: [我的壁纸库](https://github.com/Jaanai-Liu/nixos-config/tree/main/wallpapers)
+🎨 **壁纸收藏**: [我的壁纸库](https://github.com/Jaanai-Liu/nix-config/tree/main/wallpapers)
 
 ---
 
