@@ -5,14 +5,17 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;      # 对应 zsh-autosuggestions
-    syntaxHighlighting.enable = true;  # 对应 zsh-syntax-highlighting
+    autosuggestion.enable = true; # 对应 zsh-autosuggestions
+    syntaxHighlighting.enable = true; # 对应 zsh-syntax-highlighting
 
     # 对应 Oh My Zsh 配置 [cite: 3]
     oh-my-zsh = {
       enable = true;
       # theme = "robbyrussell";          # 对应 ZSH_THEME [cite: 3]
-      plugins = [ "git" "z" ]; # 对应 plugins=(...) 
+      plugins = [
+        "git"
+        "z"
+      ]; # 对应 plugins=(...)
     };
 
     # 对应 alias 配置 [cite: 21]
@@ -21,7 +24,8 @@
       la = "ls -A";
       l = "ls -CF";
       f = "fastfetch";
-      g = "gvim";
+      # g = "gvim";
+      v = "nvim";
       c = "code";
       b = "cd ..";
       py = "python3";
@@ -34,7 +38,7 @@
     # 这里放入所有原本 zshrc 中无法标准化的脚本 (Conda, 函数, export 等)
     initContent = ''
       # PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%~%{$reset_color%} \$(git_prompt_info)"
-      
+
       # 强制设置环境变量
       export IM_MODULE=fcitx
       export GTK_IM_MODULE=fcitx
@@ -70,16 +74,16 @@
         nix search nixpkgs "$1" 2>/dev/null |
         grep "^* " |
         sed -E 's/^\* (legacyPackages\.[^.]+\.|nixpkgs#)//'
-    
+
         echo "---------------------------------------------------"
         echo "👉 使用'ma <名字>'即可使用对应版本"
       }
-      
+
       # 自定义函数
       function cd() {
           builtin cd "$@" && ls
       }
-      
+
       # Micromamba 初始化
       export MAMBA_ROOT_PREFIX=$HOME/micromamba
       export MAMBA_CHANGE_PS1=false

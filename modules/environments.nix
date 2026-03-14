@@ -10,8 +10,7 @@
     (final: prev: {
       unstable = import inputs.nixpkgs-unstable {
         system = prev.system;
-        # 允许安装不稳定的闭源软件（比如某些字体、驱动或商业软件）
-        config.allowUnfree = true; 
+        config.allowUnfree = true;
       };
     })
   ];
@@ -29,7 +28,7 @@
     # system monitoring
     btop
     # htop
-    
+
     tree
 
     # archives
@@ -38,7 +37,6 @@
     zstd
     unzipNLS
     p7zip
-    
 
     # system tools
     psmisc # killall/pstree/prtstat/fuser/...
@@ -49,18 +47,15 @@
 
     fuse
 
-    strace #调试检查缺了什么strace snipaste 2>&1 | grep -iE "error|no such file"
-    
-  ];
+    strace # 调试检查缺了什么strace snipaste 2>&1 | grep -iE "error|no such file"
 
+  ];
 
   # BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
   # https://github.com/iovisor/bcc
   # programs.bcc.enable = true;
 
-  
   # environment.variables.EDITOR = "vim-full";
-
 
   programs.dconf.enable = true;
 }
