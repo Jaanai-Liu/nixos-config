@@ -158,6 +158,11 @@ window-rule {
     open-on-workspace "6file"
     open-maximized true
 }
+window-rule {
+    match app-id="electron"
+    open-on-workspace "6file"
+    // open-maximized true
+}
 
 // Other applications - open in workspace 0
 window-rule {
