@@ -2,59 +2,63 @@
   pkgs ? import <nixpkgs> { },
   pkgs-unstable ? import <nixpkgs> { },
   pkgs-stable ? import <nixpkgs> { },
+  inputs,
   ...
 }:
 let
   inherit (pkgs) lib libsForQt5 fetchFromGitHub;
 in
 {
-  wpsoffice-365 = libsForQt5.callPackage ./wpsoffice-365 { };
+  # wechat-uos = inputs.wechat-pr-repo.legacyPackages.${pkgs.system}.wechat-uos;
+  wechat-uos = pkgs.callPackage ./my-wechat { };
 
-  edrawmax = libsForQt5.callPackage ./edrawmax { };
-  edrawmax-cn = libsForQt5.callPackage ./edrawmax {
-    useChineseVersion = true;
-  };
+  # wpsoffice-365 = libsForQt5.callPackage ./wpsoffice-365 { };
 
-  rustdesk-server-pro = pkgs.callPackage ./rustdesk-server-pro { };
+  # edrawmax = libsForQt5.callPackage ./edrawmax { };
+  # edrawmax-cn = libsForQt5.callPackage ./edrawmax {
+  #  useChineseVersion = true;
+  # };
 
-  canokey-manager = pkgs.callPackage ./canokey-manager { };
+  # rustdesk-server-pro = pkgs.callPackage ./rustdesk-server-pro { };
 
-  hubproxy = pkgs.callPackage ./hubproxy { };
+  # canokey-manager = pkgs.callPackage ./canokey-manager { };
+
+  # hubproxy = pkgs.callPackage ./hubproxy { };
 
   # mpv-cheatsheet-ng = pkgs.mpvScripts.callPackage ./mpv-cheatsheet-ng { };
 
   # sunshine = pkgs-unstable.sunshine;
 
   # TODO wait merge https://github.com/NixOS/nixpkgs/pull/491229
-  backrest = pkgs.callPackage ./backrest { };
+  # backrest = pkgs.callPackage ./backrest { };
 
   # vaultwarden = pkgs.callPackage ./vaultwarden-unstable { };
 
-  obs-studio-plugins = pkgs.obs-studio-plugins // {
-    obs-nvfbc = pkgs.callPackage ./obs-nvfbc { };
-  };
+  # obs-studio-plugins = pkgs.obs-studio-plugins // {
+  #   obs-nvfbc = pkgs.callPackage ./obs-nvfbc { };
+  # };
 
-  niri = pkgs.niri.overrideAttrs (
-    final: prev: {
-      # TODO wait upstream merge  https://github.com/YaLTeR/niri/pull/1791
-      patches = [
-        (pkgs.fetchpatch {
-          name = "niri-support-shm.patch";
-          url = "https://github.com/wrvsrx/niri/compare/tag_support-shm-sharing_2~19..tag_support-shm-sharing_2.patch";
-          hash = "sha256-M2Z2HMwuJpDtk7bvvREXF21cHVra+qqUUeaKCywLt48=";
-        })
-      ];
-    }
-  );
+  # niri = pkgs.niri.overrideAttrs (
+  #   final: prev: {
+  #     # TODO wait upstream merge  https://github.com/YaLTeR/niri/pull/1791
+  #     patches = [
+  #       (pkgs.fetchpatch {
+  #         name = "niri-support-shm.patch";
+  #         url = "https://github.com/wrvsrx/niri/compare/tag_support-shm-sharing_2~19..tag_support-shm-sharing_2.patch";
+  #         hash = "sha256-M2Z2HMwuJpDtk7bvvREXF21cHVra+qqUUeaKCywLt48=";
+  #       })
+  #     ];
+  #   }
+  # );
 
-  dbeaver-agent = pkgs.callPackage ./dbeaver-agent { };
-  dbeaver-ultimate = pkgs.callPackage ./dbeaver-ultimate { };
+  # dbeaver-agent = pkgs.callPackage ./dbeaver-agent { };
+  # dbeaver-ultimate = pkgs.callPackage ./dbeaver-ultimate { };
 
   # rustdesk-flutter = pkgs-unstable.rustdesk-flutter;
 
-  hokit = pkgs.callPackage ./hokit { };
+  # hokit = pkgs.callPackage ./hokit { };
 
-  hdc = pkgs.callPackage ./hdc { };
+  # hdc = pkgs.callPackage ./hdc { };
 
   # Some package derived from unstable repo
   # siyuan = pkgs-unstable.siyuan;
