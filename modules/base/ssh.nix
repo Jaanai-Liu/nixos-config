@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.modules.bash.ssh;
+  cfg = config.modules.base.ssh;
 in
 {
   options.modules.base.ssh.harden = lib.mkOption {
