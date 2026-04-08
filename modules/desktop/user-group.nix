@@ -9,7 +9,7 @@
   # Don't allow mutation of users outside the config.
   # users.mutableUsers = false;
 
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
 
   users.users.${myvars.username} = {
     description = myvars.userfullname;
@@ -26,7 +26,7 @@
       "tty"
       "docker"
     ];
-    shell = pkgs.zsh;
+    # shell = pkgs.zsh;
     openssh.authorizedKeys.keys = myvars.sshAuthorizedKeys;
   };
 
