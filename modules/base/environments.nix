@@ -17,7 +17,6 @@
 
     # system monitoring
     btop
-    nvtopPackages.amd
     # htop
 
     tree

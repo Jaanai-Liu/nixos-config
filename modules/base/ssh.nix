@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.modules.core.ssh;
+  cfg = config.modules.bash.ssh;
 in
 {
-  options.modules.core.ssh.harden = lib.mkOption {
+  options.modules.base.ssh.harden = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Enable SSH hardening";

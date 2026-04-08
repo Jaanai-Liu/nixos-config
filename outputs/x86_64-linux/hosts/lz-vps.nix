@@ -30,7 +30,7 @@ let
       ++ [
         inputs.disko.nixosModules.disko
         {
-          modules.core.ssh.harden = true;
+          modules.base.ssh.harden = true;
           modules.secrets.server.proxy.enable = true;
           modules.services.sing-box.enable = true;
         }

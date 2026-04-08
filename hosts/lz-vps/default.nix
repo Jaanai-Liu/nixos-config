@@ -19,24 +19,6 @@
     ../../modules/server/sing-box.nix
   ];
 
-  programs.zsh.enable = true;
-  users.users.${myvars.username} = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [ "wheel" ];
-  };
-
-  # home-manager.users.${myvars.username} = {
-  #   programs.home-manager.enable = true;
-  #   home.username = myvars.username;
-  #   home.homeDirectory = "/home/${myvars.username}";
-  #   # fonts.fontconfig.enable = true;
-  #   home.stateVersion = "25.11";
-  #   imports = [
-  #     ../../home/base/shells/zsh.nix
-  #   ];
-  # };
-
   nix.settings.trusted-users = [
     "root"
     "@wheel"

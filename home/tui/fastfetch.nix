@@ -16,16 +16,14 @@
         };
       };
 
-      # === 全局显示设置 ===
       display = {
-        separator = " "; # 键值对之间的分隔符为空格
+        separator = " ";
         color = {
           title = "#bfc9c3";
           output = "#bfc9c3";
         };
       };
 
-      # === 模块与布局设置 ===
       modules = [
         "break"
 
