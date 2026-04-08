@@ -10,7 +10,7 @@
   imports = [
     # XDDXDD cache substituter
     inputs.nur-xddxdd.nixosModules.nix-cache-attic
-    inputs.nix-index-database.nixosModules.nix-index
+    # inputs.nix-index-database.nixosModules.nix-index
   ];
   # auto upgrade nix to the unstable version
   # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/tools/package-management/nix/default.nix#L284
