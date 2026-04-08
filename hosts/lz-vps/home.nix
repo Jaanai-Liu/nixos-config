@@ -13,6 +13,6 @@
   home.stateVersion = "25.11";
 
   imports = [
-    ../../home/base/shells/zsh.nix
+    ../../home/base/shells
   ];
 }
