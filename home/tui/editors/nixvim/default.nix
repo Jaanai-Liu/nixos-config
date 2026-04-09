@@ -1,12 +1,15 @@
 { pkgs, ... }:
 {
+  home.shellAliases = {
+    v = "nvim";
+  };
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    vAlias = true;
     viAlias = true;
     vimAlias = true;
-
-    # imports = mylib.scanPaths ./.;
 
     imports = [
       # General Configuration

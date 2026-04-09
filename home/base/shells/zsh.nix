@@ -21,7 +21,7 @@
       l = "ls -CF";
       f = "fastfetch";
       # g = "gvim";
-      v = "nvim";
+      # v = "nvim";
       c = "code";
       b = "cd ..";
       py = "python3";
