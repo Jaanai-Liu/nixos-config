@@ -16,6 +16,7 @@ let
     };
     lz-vps.ipv4 = "23.95.28.22";
     lz-aliyun-sh.ipv4 = "";
+    lz-wsl.ipv4 = "";
   };
 
   resolvedHosts = lib.mapAttrs (

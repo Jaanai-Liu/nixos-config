@@ -25,7 +25,7 @@ let
     // {
       inherit mylib myvars;
       # myvars = vars;
-      # inherit inputs;
+      inherit inputs;
 
       pkgs-stable = import inputs.nixpkgs-stable {
         inherit system;
