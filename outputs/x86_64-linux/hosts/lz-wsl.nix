@@ -30,9 +30,8 @@ let
       ++ [
 	inputs.nixos-wsl.nixosModules.default
         {
-          modules.base.ssh.harden = true;
+          # modules.base.ssh.harden = true;
           # modules.secrets.server.proxy.enable = true;
-          # modules.services.sing-box.enable = true;
         }
       ];
     home-modules = [
