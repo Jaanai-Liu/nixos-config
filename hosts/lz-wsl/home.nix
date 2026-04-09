@@ -14,5 +14,6 @@
 
   imports = [
     ../../home/base
+    ../../home/tui
   ];
 }
