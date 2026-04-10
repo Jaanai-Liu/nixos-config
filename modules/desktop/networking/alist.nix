@@ -12,10 +12,6 @@ in
 {
   environment.systemPackages = [ pkgs.alist ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "alist-${pkgs.alist.version}"
-  ];
-
   systemd.services.alist = {
     description = "Alist File Server Daemon";
     after = [ "network-online.target" ];
