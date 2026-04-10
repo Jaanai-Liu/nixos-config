@@ -12,7 +12,7 @@ in
 {
   options.modules.desktop = {
     ai = {
-      enable = mkEnableOption "Local AI stack (Ollama + Open WebUI)";
+      enable = mkEnableOption "Local AI stack (Ollama + Open WebUI + ROCm)";
     };
   };
 
@@ -35,21 +35,20 @@ in
       port = 8080;
     };
 
-    systemd.services.ollama.wantedBy = mkForce [ ];
-    systemd.services.open-webui.wantedBy = mkForce [ ];
-
     hardware.graphics = {
       enable = true;
       extraPackages = with pkgs; [
         rocmPackages.clr.icd
+        rocmPackages.clr
       ];
     };
 
     users.users.${myvars.username}.extraGroups = [
-      "video"
       "render"
     ];
 
+    systemd.services.ollama.wantedBy = mkForce [ ];
+    systemd.services.open-webui.wantedBy = mkForce [ ];
     networking.firewall.allowedTCPPorts = [ 8080 ];
 
     environment.shellAliases = {

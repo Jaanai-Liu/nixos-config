@@ -33,16 +33,10 @@
   # Define your hostname.
   networking.hostName = "lz-pc";
 
-  # AMD GPU ROCm
+  # AMD GPU
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-      rocmPackages.clr
-    ];
-  };
+  hardware.graphics.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
