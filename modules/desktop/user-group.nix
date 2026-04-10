@@ -25,6 +25,7 @@
       "dialout"
       "tty"
       "docker"
+      "render"
     ];
     # shell = pkgs.zsh;
     openssh.authorizedKeys.keys = myvars.sshAuthorizedKeys;

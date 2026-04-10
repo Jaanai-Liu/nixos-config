@@ -24,12 +24,25 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   # Hibernate 休眠
   boot.resumeDevice = "/dev/disk/by-uuid/8b14124f-e4c1-4f9d-9e9d-af852e1bc152";
   # 电源管理
   powerManagement.enable = true;
 
-  networking.hostName = "lz-pc"; # Define your hostname.
+  # Define your hostname.
+  networking.hostName = "lz-pc";
+
+  # AMD GPU ROCm
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+      rocmPackages.clr
+    ];
+  };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
