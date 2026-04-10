@@ -1,6 +1,5 @@
 { ... }:
 {
-  #键盘布局
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   # Configure keymap in X11
@@ -57,9 +56,9 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  # 性能模式切换引擎（控制 Performance/Balanced/Power Saver）
+  # ( Performance/Balanced/Power Saver ）
   services.power-profiles-daemon.enable = true;
-  # 电池状态监听服务（读取百分比、充电状态）
+  # battery
   services.upower.enable = true;
 
   services.envfs.enable = true;

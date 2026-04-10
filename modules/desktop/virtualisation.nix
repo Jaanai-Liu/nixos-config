@@ -11,7 +11,7 @@
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true;
-      swtpm.enable = true; # 支持 TPM 2.0 (装 Win11 可能会用到)
+      swtpm.enable = true; # support TPM 2.0 when using WIN11
     };
   };
 
