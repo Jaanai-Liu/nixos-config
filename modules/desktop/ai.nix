@@ -40,6 +40,7 @@ in
       extraPackages = with pkgs; [
         rocmPackages.clr.icd
         rocmPackages.clr
+        rocmPackages.rocm-smi
       ];
     };
 
