@@ -22,11 +22,12 @@ let
         "secrets/nixos.nix"
       ])
       ++ [
+        inputs.disko.nixosModules.disko
         {
           modules.secrets.desktop.enable = true;
           modules.desktop.gaming.enable = true;
           modules.desktop.synopsys.enable = true;
-          modules.desktop.ai.enable = true;
+          modules.desktop.ai.enable = false;
         }
       ];
 
