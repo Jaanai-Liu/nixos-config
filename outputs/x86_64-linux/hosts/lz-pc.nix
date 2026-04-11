@@ -24,10 +24,10 @@ let
       ++ [
         inputs.disko.nixosModules.disko
         {
-          modules.secrets.desktop.enable = true;
+          # modules.secrets.desktop.enable = true;
           modules.desktop.gaming.enable = true;
-          modules.desktop.synopsys.enable = true;
-          modules.desktop.ai.enable = false;
+          # modules.desktop.synopsys.enable = true;
+          # modules.desktop.ai.enable = false;
         }
       ];
 
