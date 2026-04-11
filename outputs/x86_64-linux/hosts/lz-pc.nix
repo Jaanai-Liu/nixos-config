@@ -17,7 +17,7 @@ let
   base-modules = {
     nixos-modules =
       (map mylib.relativeToRoot [
-        "hosts/${hostname}/configuration.nix"
+        "hosts/${hostname}/default.nix"
         "modules"
         "secrets/nixos.nix"
       ])

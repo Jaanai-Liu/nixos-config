@@ -66,5 +66,5 @@
   nixpkgs.config = myvars.nixpkgs-config;
 
   # Flatpak
-  # services.flatpak.enable = true; # 启用 Flatpak
+  # services.flatpak.enable = true;
 }

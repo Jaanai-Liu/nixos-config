@@ -18,7 +18,7 @@
     shellAliases = {
       ll = "ls -alF";
       la = "ls -A";
-      l = "ls -CF";
+      # l = "ls -CF";
       f = "fastfetch";
       # g = "gvim";
       # v = "nvim";

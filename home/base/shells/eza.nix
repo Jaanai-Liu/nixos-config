@@ -6,7 +6,8 @@
     icons = "auto";
     git = true;
   };
-  programs.fish.shellAliases = {
-    l = "eza -la";
+  programs.zsh.shellAliases = {
+    # l = "eza -la";
+    l = "eza";
   };
 }
