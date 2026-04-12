@@ -38,7 +38,18 @@
 
           subvolume = {
             # Backing up your home directory (Thesis, BP Neural Network code, etc.)
-            "home" = {
+
+            # "home" = {
+            #   snapshot_create = "always";
+            # };
+
+            "@root" = {
+              snapshot_create = "always";
+            };
+            "@nix" = {
+              snapshot_create = "always";
+            };
+            "@persist" = {
               snapshot_create = "always";
             };
           };

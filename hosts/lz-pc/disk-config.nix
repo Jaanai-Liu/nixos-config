@@ -34,6 +34,20 @@
                 type = "btrfs";
                 extraArgs = [ "-f" ];
                 subvolumes = {
+                  "/" = {
+                    mountpoint = "/btr_pool";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/@btrbk_archive" = {
+                    mountpoint = "/btrbk_archive";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
                   "/@root" = {
                     mountpoint = "/";
                     mountOptions = [

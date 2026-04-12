@@ -22,6 +22,13 @@
     };
   };
 
+  # Rime ice
+  xdg.dataFile."fcitx5/rime/default.custom.yaml".text = ''
+    patch:
+      schema_list:
+        - schema: rime_ice
+  '';
+
   home.packages = with pkgs; [
     lxgw-wenkai
   ];
@@ -35,8 +42,9 @@
       fcitx5-gtk # gtk im module
 
       # Chinese
-      fcitx5-rime # for flypy chinese input method
+      # fcitx5-rime # for flypy chinese input method
       # fcitx5-chinese-addons # we use rime instead
+      (fcitx5-rime.override { rimeDataPkgs = [ rime-ice ]; })
 
       # Japanese
       # ctrl-i / F7 - convert to takakana
