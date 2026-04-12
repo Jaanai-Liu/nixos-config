@@ -120,9 +120,17 @@ in
         "nix-config"
         "tmp"
 
-        ".ssh"
-        ".gnupg"
-        ".local/share/keyrings"
+        # ======================================
+        # Chat files
+        # ======================================
+        "xwechat_files"
+        ".xwechat"
+
+        # ======================================
+        # fcitx5 chinese
+        # ======================================
+        ".config/fcitx5"
+        ".local/share/fcitx5"
 
         # ======================================
         # Nix / Home Manager Profiles
