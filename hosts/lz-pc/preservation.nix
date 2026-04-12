@@ -2,11 +2,11 @@
   inputs,
   lib,
   pkgs,
+  myvars,
   ...
 }:
 let
-  # 假设你的用户名是 zheng，如果不是请替换
-  username = "zheng";
+  username = myvars.username;
 in
 {
   imports = [
