@@ -32,7 +32,7 @@
 
       volume = {
         # Assuming your Btrfs root is mounted at "/"
-        "/" = {
+        "/btr_pool" = {
           # Directory where short-term snapshots are temporarily stored
           snapshot_dir = ".btrbk_snapshots";
 
