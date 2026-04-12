@@ -82,6 +82,14 @@ in
       "/var/lib/tailscale"
       "/var/lib/netbird-homelab" # netbird's homelab client
       "/etc/netbird-homelab"
+
+      # openlist
+      {
+        directory = "/var/lib/openlist";
+        user = username;
+        group = "users";
+        mode = "0700";
+      }
     ];
     files = [
       # auto-generated machine ID
@@ -121,6 +129,11 @@ in
         "tmp"
 
         # ======================================
+        # media
+        # ======================================
+        ".cache/mpv"
+
+        # ======================================
         # Chat files
         # ======================================
         "xwechat_files"
@@ -142,6 +155,9 @@ in
         # ======================================
         # IDE / Editors
         # ======================================
+
+        "~/.local/share/direnv"
+
         # neovim plugins
         ".wakatime"
 
@@ -210,6 +226,8 @@ in
         }
         ".terraform.d/plugin-cache" # terraform's plugin plugin-cache
 
+        ".cache/rclone"
+
         # ======================================
         # language package managers
         # ======================================
@@ -225,12 +243,9 @@ in
         # python uv
         ".local/share/uv"
 
-        "~/.local/share/direnv"
-
         # ======================================
         # Security
         # ======================================
-
         {
           directory = ".gnupg";
           mode = "0700";
@@ -355,6 +370,7 @@ in
           file = ".claude.json";
           how = "bindmount";
         }
+
       ];
     };
   };

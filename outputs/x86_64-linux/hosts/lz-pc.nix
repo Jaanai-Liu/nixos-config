@@ -25,7 +25,7 @@ let
         inputs.disko.nixosModules.disko
         # inputs.preservation.nixosModules.preservation
         {
-          # modules.secrets.desktop.enable = true;
+          modules.secrets.desktop.enable = true;
           modules.desktop.gaming.enable = true;
           # modules.desktop.synopsys.enable = true;
           # modules.desktop.ai.enable = false;
