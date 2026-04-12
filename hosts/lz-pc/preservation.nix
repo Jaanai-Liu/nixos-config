@@ -225,6 +225,8 @@ in
         # python uv
         ".local/share/uv"
 
+        "~/.local/share/direnv"
+
         # ======================================
         # Security
         # ======================================
@@ -282,6 +284,10 @@ in
 
         ".config/remmina"
         ".local/share/remmina"
+
+        ".config/LarkShell"
+        "~/.config/bytertc"
+        # ".cache/LarkShell"
 
         # ======================================
         # browsers
