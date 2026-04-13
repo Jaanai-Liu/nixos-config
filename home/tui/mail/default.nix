@@ -12,13 +12,13 @@ in
     enable = lib.mkEnableOption "Enable mail client (aerc + offlineimap)";
   };
 
-  config = lib.mkIf cfg.enable {
-    imports = [
-      ./aerc
-      ./offlineimap
-      ./imapnotify
-    ];
+  imports = [
+    ./aerc
+    ./offlineimap
+    ./imapnotify
+  ];
 
+  config = lib.mkIf cfg.enable {
     home.packages = [
       (pkgs.mkScriptsPackage "mail-scripts" ./scripts)
     ];
