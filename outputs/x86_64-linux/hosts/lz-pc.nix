@@ -26,6 +26,7 @@ let
         # inputs.preservation.nixosModules.preservation
         {
           modules.secrets.desktop.enable = true;
+          modules.secrets.mail.enable = true;
           modules.desktop.gaming.enable = true;
           # modules.desktop.synopsys.enable = true;
           # modules.desktop.ai.enable = false;
