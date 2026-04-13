@@ -11,6 +11,15 @@ in
         enable = true;
         create = "both";
         expunge = "both";
+        patterns = [
+          "INBOX"
+          "[Gmail]/Sent Mail"
+          "[Gmail]/Drafts"
+          "[Gmail]/Trash"
+          "[Gmail]/Spam"
+          "[Gmail]/Starred"
+          "[Gmail]/Important"
+        ];
       };
       # "QQ".mbsync = { enable = true; create = "both"; expunge = "both"; };
       # "163".mbsync = { enable = true; create = "both"; expunge = "both"; };
