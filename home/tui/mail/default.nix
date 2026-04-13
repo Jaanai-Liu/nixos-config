@@ -15,7 +15,6 @@ in
 
   imports = [
     ./aerc
-    ./offlineimap
     ./imapnotify
     ./mbsync
   ];
