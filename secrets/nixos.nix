@@ -83,7 +83,20 @@ in
     })
 
     # ==========================================
-    # ☁️ 【VPS 代理专区】只有开启 server.proxy.enable 才加载
+    # 📧 Mail config
+    # ==========================================
+    (mkIf cfg.mail.enable {
+      age.secrets = {
+        "aerc-accounts" = {
+          file = "${mysecrets}/secrets/aerc-accounts.age";
+          path = "/home/${myvars.username}/.config/aerc/accounts.conf";
+        }
+        // user_readable;
+      };
+    })
+
+    # ==========================================
+    # ☁️ VPS proxy
     # ==========================================
     (mkIf cfg.server.proxy.enable {
       age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
