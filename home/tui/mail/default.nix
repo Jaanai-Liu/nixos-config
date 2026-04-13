@@ -1,23 +1,26 @@
 {
   config,
-  myhome,
   pkgs,
   lib,
   ...
 }:
 let
-  mail-scripts = pkgs.mkScriptsPackage "mail-scripts" ./scripts;
-  cfg = config.myhome.tuiExtra.mail;
-  rawcfg = myhome.tuiExtra.mail;
+  cfg = config.home.tui.mail;
 in
 {
-  imports = lib.optionals rawcfg.enable [
-    ./aerc
-    ./offlineimap
-    ./imapnotify
-  ];
+  options.modules.tui.mail = {
+    enable = lib.mkEnableOption "Enable mail client (aerc + offlineimap)";
+  };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ mail-scripts ];
+    imports = [
+      ./aerc
+      ./offlineimap
+      ./imapnotify
+    ];
+
+    home.packages = [
+      (pkgs.mkScriptsPackage "mail-scripts" ./scripts)
+    ];
   };
 }
