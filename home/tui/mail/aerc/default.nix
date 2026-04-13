@@ -41,10 +41,10 @@
   };
 
   accounts.email.accounts = {
-    "Gmail".aerc.enable = true;
-    # "QQ".aerc.enable = true;
-    # "163".aerc.enable = true;
-    # "SWJTU".aerc.enable = true;
+    "Gmail" = {
+      aerc.enable = true;
+      aerc.extraAccounts.source = "maildir://~/Mail/Gmail";
+    };
   };
 
   xdg.configFile."aerc/stylesets/nord".source = ./style-nord;

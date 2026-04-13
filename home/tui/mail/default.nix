@@ -24,6 +24,8 @@ in
     # home.packages = [
     #   (pkgs.mkScriptsPackage "mail-scripts" ./scripts)
     # ];
+    accounts.email.maildirBasePath = "Mail";
+
     accounts.email.accounts = {
 
       "Gmail" = {
