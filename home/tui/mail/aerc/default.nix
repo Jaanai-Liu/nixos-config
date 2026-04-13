@@ -8,6 +8,9 @@
   programs.aerc = {
     enable = true;
     extraConfig = {
+      # allow unsafe
+      general.unsafe-accounts-conf = true;
+
       general.enable-osc8 = true;
       ui = {
         mouse-enabled = true;
