@@ -38,7 +38,7 @@ in
         "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
 
         "org.freedesktop.impl.portal.Settings" = [
-          "gnome"
+          # "gnome"
           "gtk"
         ];
         # "org.freedesktop.impl.portal.Secret" = [ "gnome" ];

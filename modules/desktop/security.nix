@@ -21,6 +21,9 @@
   #   ];
   # };
 
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.niri = { };
+
   # security with polkit
   security.polkit.enable = true;
   # security with gnome-kering

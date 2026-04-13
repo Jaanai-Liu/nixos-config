@@ -11,8 +11,7 @@ let
 in
 {
   home.packages = [
-    # noctalia-pkg
-    pkgs.noctalia-shell
+    noctalia-pkg
     pkgs.qt6Packages.qt6ct
     pkgs.app2unit
   ]

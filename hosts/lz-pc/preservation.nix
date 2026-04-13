@@ -124,7 +124,6 @@ in
         # ======================================
         "work" # for work contains a .gitconfig with my work email.
         "projects" # for personal code
-        "Android"
         "nix-config"
         "tmp"
 
@@ -192,6 +191,15 @@ in
         # Joplin
         ".config/joplin" # tui client
         ".config/Joplin" # joplin-desktop
+
+        # Android
+        "Android"
+        ".android"
+        ".gradle"
+        ".config/Google"
+        ".local/share/Google"
+        ".cache/Google"
+        ".java"
 
         ".local/share/jupyter"
         ".ipython"
