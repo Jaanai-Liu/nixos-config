@@ -8,7 +8,7 @@ let
   cfg = config.home.tui.mail;
 in
 {
-  options.modules.tui.mail = {
+  options.home.tui.mail = {
     enable = lib.mkEnableOption "Enable mail client (aerc + offlineimap)";
   };
 
