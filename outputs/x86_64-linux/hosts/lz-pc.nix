@@ -28,8 +28,12 @@ let
           modules.secrets.desktop.enable = true;
           modules.secrets.mail.enable = true;
           modules.desktop.gaming.enable = true;
-          # modules.desktop.synopsys.enable = true;
-          # modules.desktop.ai.enable = false;
+          modules.desktop.synopsys.enable = false;
+          modules.desktop.ai.enable = false;
+          # server
+          modules.base.ssh.harden = false;
+          modules.secrets.server.proxy.enable = false;
+          modules.services.sing-box.enable = false;
         }
       ];
 

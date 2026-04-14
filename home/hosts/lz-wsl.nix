@@ -2,7 +2,14 @@
 { myvars, pkgs, ... }:
 
 {
-  programs.home-manager.enable = true;
+  imports = [
+    ../../home/base
+    ../../home/tui
+  ];
+
+  # home.desktop.niri.enable = true;
+  # home.tui.mail.enable = true;
+
   home.username = myvars.username;
   home.homeDirectory = "/home/${myvars.username}";
 
@@ -12,8 +19,5 @@
 
   home.stateVersion = "25.11";
 
-  imports = [
-    ../../home/base
-    ../../home/tui
-  ];
+  programs.home-manager.enable = true;
 }
