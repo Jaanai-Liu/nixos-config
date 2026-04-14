@@ -18,6 +18,7 @@ in
     # ./imapnotify
     # ./mbsync
     ./himalaya
+    ./meli
   ];
 
   config = lib.mkIf cfg.enable {
