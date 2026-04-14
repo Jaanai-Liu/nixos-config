@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}:
+}@args:
 
 let
   cfg = config.home.tui.mail;
@@ -14,18 +14,26 @@ in
     enable = lib.mkEnableOption "TUI Mail setup";
   };
 
-  imports = [
-    ./aerc
-    ./offlineimap
-    ./imapnotify
-  ];
+  # imports = [
+  #   ./aerc
+  #   ./offlineimap
+  #   ./imapnotify
+  # ];
 
-  config = lib.mkIf cfg.enable {
+  # config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        home.packages = with pkgs; [
+          mail-scripts
+          libnotify
+          pulseaudio
+        ];
+      }
+      (import ./aerc args)
+      (import ./offlineimap args)
+      (import ./imapnotify args)
 
-    home.packages = with pkgs; [
-      mail-scripts
-      libnotify
-      pulseaudio
-    ];
-  };
+    ]
+  );
 }

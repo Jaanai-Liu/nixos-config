@@ -131,7 +131,7 @@ in
         # Mail
         # ======================================
         "Mail"
-        # ".config/aerc"
+        ".config/aerc"
         ".offlineimap"
         ".local/share/goimapnotify"
 
