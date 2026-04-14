@@ -25,11 +25,19 @@ let
         inputs.disko.nixosModules.disko
         # inputs.preservation.nixosModules.preservation
         {
+          # nix secret
           modules.secrets.desktop.enable = true;
           modules.secrets.mail.enable = true;
+
+          # btrbk
+          modules.btrbk.enable = true;
+          modules.btrbk.role = "workstation";
+
+          # tui app config
           modules.desktop.gaming.enable = true;
           modules.desktop.synopsys.enable = false;
           modules.desktop.ai.enable = false;
+
           # server
           modules.base.ssh.harden = false;
           modules.secrets.server.proxy.enable = false;

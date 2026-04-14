@@ -30,9 +30,14 @@ let
       ++ [
         inputs.disko.nixosModules.disko
         {
+          # server
           modules.base.ssh.harden = true;
           modules.secrets.server.proxy.enable = true;
           modules.services.sing-box.enable = true;
+
+          # btrbk
+          modules.btrbk.enable = true;
+          modules.btrbk.role = "server";
         }
       ];
     home-modules = [
