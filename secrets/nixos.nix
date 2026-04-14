@@ -89,27 +89,42 @@ in
     (mkIf cfg.mail.enable {
       age.secrets = {
 
+        # Mail password
         "pass-gmail" = {
           file = "${mysecrets}/secrets/pass-gmail.age";
           path = "/home/${myvars.username}/.config/mail-secrets/gmail";
         }
         // user_readable;
-
         "pass-qqmail" = {
           file = "${mysecrets}/secrets/pass-qqmail.age";
           path = "/home/${myvars.username}/.config/mail-secrets/qq";
         }
         // user_readable;
-
         "pass-163mail" = {
           file = "${mysecrets}/secrets/pass-163mail.age";
           path = "/home/${myvars.username}/.config/mail-secrets/163";
         }
         // user_readable;
-
         "pass-swjtu-mail" = {
           file = "${mysecrets}/secrets/pass-swjtu-mail.age";
           path = "/home/${myvars.username}/.config/mail-secrets/swjtu";
+        }
+        // user_readable;
+
+        # Mail client config
+        "offlineimaprc" = {
+          file = "${mysecrets}/secrets/offlineimaprc.age";
+          path = "/home/${myvars.username}/.offlineimaprc";
+        }
+        // user_readable;
+        "goimapnotify-yaml" = {
+          file = "${mysecrets}/secrets/goimapnotify.yaml.age";
+          path = "/home/${myvars.username}/.config/goimapnotify/goimapnotify.yaml";
+        }
+        // user_readable;
+        "aerc-accounts" = {
+          file = "${mysecrets}/secrets/aerc-accounts.conf.age";
+          path = "/home/${myvars.username}/.config/aerc/accounts.conf";
         }
         // user_readable;
       };

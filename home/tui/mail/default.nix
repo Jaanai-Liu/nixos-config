@@ -15,7 +15,6 @@ in
   };
 
   imports = [
-    ./accounts.nix
     ./aerc
     ./offlineimap
     ./imapnotify
