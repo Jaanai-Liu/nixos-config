@@ -35,7 +35,7 @@ let
         }
       ];
     home-modules = [
-      (mylib.relativeToRoot "hosts/hosts/${name}.nix")
+      (mylib.relativeToRoot "home/hosts/${name}.nix")
       inputs.nixvim.homeModules.nixvim
     ];
   };
