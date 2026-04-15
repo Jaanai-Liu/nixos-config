@@ -17,7 +17,7 @@
   ...
 }@args:
 let
-  name = "lz-aliyun-sh";
+  name = "lz-ali";
   nodeConf = myvars.networking.hostsAddr.${name};
 
   modules = {
