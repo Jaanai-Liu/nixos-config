@@ -22,10 +22,10 @@
     # NUR packages
     nur.url = "github:nix-community/NUR";
 
-    nur-xddxdd = {
-      url = "github:xddxdd/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nur-xddxdd = {
+    #   url = "github:xddxdd/nur-packages";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
