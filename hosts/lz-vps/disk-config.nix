@@ -21,21 +21,13 @@
                 mountpoint = "/boot";
               };
             };
-            # root = {
-            #   size = "100%";
+            # swap = {
+            #   size = "1G";
             #   content = {
-            #     type = "filesystem";
-            #     format = "ext4";
-            #     mountpoint = "/";
+            #     type = "swap";
+            #     resumeDevice = true;
             #   };
             # };
-            swap = {
-              size = "2G";
-              content = {
-                type = "swap";
-                resumeDevice = true;
-              };
-            };
             root = {
               size = "100%";
               content = {

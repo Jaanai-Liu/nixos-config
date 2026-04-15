@@ -25,25 +25,25 @@ let
       (map mylib.relativeToRoot [
         "hosts/${name}/default.nix"
         # modules"
-        # "secrets/nixos.nix"
+        "secrets/nixos.nix"
       ])
       ++ [
         inputs.disko.nixosModules.disko
         {
           # server
-          # modules.base.ssh.harden = true;
-          # modules.secrets.server.proxy.enable = true;
-          # modules.services.sing-box.enable = true;
+          modules.base.ssh.harden = true;
+          modules.secrets.server.proxy.enable = true;
+          modules.services.sing-box.enable = true;
 
           # btrbk
-          # modules.btrbk.enable = true;
-          # modules.btrbk.role = "server";
+          modules.btrbk.enable = true;
+          modules.btrbk.role = "server";
         }
       ];
-    # home-modules = [
-    #   (mylib.relativeToRoot "home/hosts/${name}.nix")
-    #   # inputs.nixvim.homeModules.nixvim
-    # ];
+    home-modules = [
+      (mylib.relativeToRoot "home/hosts/${name}.nix")
+      # inputs.nixvim.homeModules.nixvim
+    ];
   };
   systemArgs = modules // args;
 in
