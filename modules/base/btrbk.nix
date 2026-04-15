@@ -63,9 +63,6 @@ in
             };
           };
         };
-        # systemd.tmpfiles.rules = [
-        #   "d /.btrbk_snapshots 0700 root root -"
-        # ];
       })
 
       # ------------------ Workstation Role ------------------ #
@@ -92,27 +89,11 @@ in
               "/btr_pool" = {
                 # Directory where short-term snapshots are temporarily stored
                 snapshot_dir = "@snapshots";
-
                 subvolume = {
-                  # Backing up your home directory (Thesis, BP Neural Network code, etc.)
-
-                  # "home" = {
-                  #   snapshot_create = "always";
-                  # };
-
-                  # "@root" = {
-                  #   snapshot_create = "always";
-                  # };
-                  # "@nix" = {
-                  #   snapshot_create = "always";
-                  # };
                   "@persistent" = {
                     snapshot_create = "always";
                   };
                 };
-
-                # Since you have only one drive, the target is a local path.
-                # You should create this subvolume first: sudo btrfs subvolume create /btrbk_archive
                 target = "/snapshots/local";
               };
 
