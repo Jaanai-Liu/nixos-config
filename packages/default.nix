@@ -9,8 +9,7 @@ let
   inherit (pkgs) lib libsForQt5 fetchFromGitHub;
 in
 {
-  # wechat-uos = inputs.wechat-pr-repo.legacyPackages.${pkgs.system}.wechat-uos;
-  wechat-uos = pkgs.callPackage ./my-wechat { };
+  # wechat-uos = pkgs.callPackage ./my-wechat { };
 
   # wpsoffice-365 = libsForQt5.callPackage ./wpsoffice-365 { };
 

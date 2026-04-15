@@ -139,7 +139,10 @@ let
       symbol = "⛵";
       disabled = false;
     };
-    os.disabled = false;
+    os = {
+      disabled = false;
+      symbols.NixOS = " ";
+    };
   };
 
 in
