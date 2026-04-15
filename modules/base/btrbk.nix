@@ -107,13 +107,13 @@ in
               };
 
               # -------------------- ali btrfs trans -------------------- #
-              # "ssh://lz-ali/btr_pool" = {
-              #   snapshot_dir = "@snapshots";
-              #   subvolume."@" = { };
-              #   subvolume."@home" = { };
-              #   target = "/snapshots/lz-ali";
-              #   ssh_identity = "/home/${myvars.username}/.ssh/id_ed25519";
-              # };
+              "ssh://lz-ali/btr_pool" = {
+                snapshot_dir = "@snapshots";
+                subvolume."@" = { };
+                subvolume."@home" = { };
+                target = "/snapshots/lz-ali";
+                ssh_identity = "/home/${myvars.username}/.ssh/id_ed25519";
+              };
             };
           };
         };
