@@ -42,9 +42,10 @@ in
   #
   # ==================================================================
 
-  # ------------------ Server Role ------------------ #
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
+
+      # ------------------ Server Role ------------------ #
       (lib.mkIf (cfg.role == "server") {
         services.btrbk.instances.btrbk = {
           onCalendar = "daily";
@@ -54,17 +55,16 @@ in
             target_preserve = "no";
             target_preserve_min = "no";
 
-            volume."/" = {
-              snapshot_dir = "/.btrbk_snapshots";
-              subvolume."." = { };
-              subvolume."home" = { };
+            volume."/btr_pool" = {
+              snapshot_dir = "@snapshots";
+              subvolume."@" = { };
+              subvolume."@home" = { };
             };
           };
         };
-
-        systemd.tmpfiles.rules = [
-          "d /.btrbk_snapshots 0700 root root -"
-        ];
+        # systemd.tmpfiles.rules = [
+        #   "d /.btrbk_snapshots 0700 root root -"
+        # ];
       })
 
       # ------------------ Workstation Role ------------------ #
@@ -90,7 +90,7 @@ in
               # Assuming your Btrfs root is mounted at "/"
               "/btr_pool" = {
                 # Directory where short-term snapshots are temporarily stored
-                snapshot_dir = ".btrbk_snapshots";
+                snapshot_dir = ".snapshots";
 
                 subvolume = {
                   # Backing up your home directory (Thesis, BP Neural Network code, etc.)
@@ -112,13 +112,13 @@ in
 
                 # Since you have only one drive, the target is a local path.
                 # You should create this subvolume first: sudo btrfs subvolume create /btrbk_archive
-                target = "/btrbk_archive/local";
+                target = "/snapshots/local";
               };
-              "ssh://lz-vps/" = {
-                snapshot_dir = "/.btrbk_snapshots";
-                subvolume."." = { };
-                subvolume."home" = { };
-                target = "/btrbk_archive/lz-vps";
+              "ssh://lz-vps/btr_pool" = {
+                snapshot_dir = "@snapshots";
+                subvolume."@" = { };
+                subvolume."@home" = { };
+                target = "/snapshots/lz-vps";
               };
             };
           };

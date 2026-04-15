@@ -73,20 +73,13 @@
                       "noatime"
                     ];
                   };
-                  "/@btrbk_archive" = {
-                    mountpoint = "/btrbk_archive";
+                  "/@snapshots" = {
+                    mountpoint = "/snapshots";
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
                     ];
                   };
-                  # "/@root" = {
-                  #   mountpoint = "/";
-                  #   mountOptions = [
-                  #     "compress=zstd"
-                  #     "noatime"
-                  #   ];
-                  # };
                   "/@nix" = {
                     mountpoint = "/nix";
                     mountOptions = [
