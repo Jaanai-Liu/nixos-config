@@ -27,6 +27,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    # nix index for conma
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,11 +40,12 @@
     };
 
     # VSCode Extensions (from community)
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-vscode-extensions = {
+    #   url = "github:nix-community/nix-vscode-extensions";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
+    # neovim for nix
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
