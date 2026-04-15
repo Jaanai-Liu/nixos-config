@@ -1,4 +1,4 @@
-# outputs/x86_64-linux/hosts/lz-aliyun-sh.nix
+# outputs/x86_64-linux/hosts/lz-ali.nix
 {
   # NOTE: the args not used in this file CAN NOT be removed!
   # because haumea pass argument lazily,
@@ -30,9 +30,18 @@ let
       ++ [
         inputs.disko.nixosModules.disko
         {
+          # server ssh
           modules.base.ssh.harden = true;
+
+          # secrets
           # modules.secrets.server.proxy.enable = true;
+
+          # sing-box
           # modules.services.sing-box.enable = true;
+
+          # btrbk
+          modules.btrbk.enable = true;
+          modules.btrbk.role = "server";
         }
       ];
     home-modules = [
@@ -55,7 +64,7 @@ in
         "sudo"
         "-E"
       ];
-      tags = [ "vps" ];
+      tags = [ "server" ];
     }
   );
 }

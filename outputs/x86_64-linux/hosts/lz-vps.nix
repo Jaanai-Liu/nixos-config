@@ -30,11 +30,13 @@ let
       ++ [
         inputs.disko.nixosModules.disko
         {
-          # server
+          # server ssh
           modules.base.ssh.harden = true;
 
           # secrets
           modules.secrets.server.proxy.enable = true;
+
+          # sing-box
           modules.services.sing-box.enable = true;
 
           # btrbk
@@ -62,7 +64,7 @@ in
         "sudo"
         "-E"
       ];
-      tags = [ "vps" ];
+      tags = [ "server" ];
     }
   );
 }

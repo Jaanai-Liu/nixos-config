@@ -30,8 +30,11 @@ let
       ++ [
         inputs.nixos-wsl.nixosModules.default
         {
+          # secrets
           modules.secrets.desktop.enable = true;
           modules.secrets.mail.enable = false;
+
+          # desktop app
           # modules.desktop.gaming.enable = false;
           # modules.desktop.synopsys.enable = false;
           # modules.desktop.ai.enable = false;
