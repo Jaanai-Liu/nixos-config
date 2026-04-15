@@ -115,6 +115,8 @@ in
                 # You should create this subvolume first: sudo btrfs subvolume create /btrbk_archive
                 target = "/snapshots/local";
               };
+
+              # -------------------- vps btrfs trans -------------------- #
               "ssh://lz-vps/btr_pool" = {
                 snapshot_dir = "@snapshots";
                 subvolume."@" = { };
@@ -122,6 +124,15 @@ in
                 target = "/snapshots/lz-vps";
                 ssh_identity = "/home/${myvars.username}/.ssh/id_ed25519";
               };
+
+              # -------------------- ali btrfs trans -------------------- #
+              # "ssh://lz-ali/btr_pool" = {
+              #   snapshot_dir = "@snapshots";
+              #   subvolume."@" = { };
+              #   subvolume."@home" = { };
+              #   target = "/snapshots/lz-ali";
+              #   ssh_identity = "/home/${myvars.username}/.ssh/id_ed25519";
+              # };
             };
           };
         };
