@@ -26,5 +26,8 @@
     # ventoy
 
     protontricks
+
+    python3
+    python3Packages.pip
   ];
 }

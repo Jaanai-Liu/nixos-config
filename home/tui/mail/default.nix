@@ -33,7 +33,6 @@ in
       (import ./aerc args)
       (import ./offlineimap args)
       (import ./imapnotify args)
-
     ]
   );
 }
