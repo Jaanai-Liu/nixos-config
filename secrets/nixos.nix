@@ -33,6 +33,7 @@ in
     desktop.enable = mkEnableOption "NixOS Secrets for Desktops";
     mail.enable = mkEnableOption "NixOS Secrets for Mail Clients";
     server.proxy.enable = mkEnableOption "NixOS Secrets for Proxy Server";
+    server.siyuan.enable = mkEnableOption "NixOS Secrets for SiYuan Server";
   };
 
   config = mkMerge [
