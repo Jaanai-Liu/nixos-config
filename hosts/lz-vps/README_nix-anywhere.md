@@ -1,164 +1,194 @@
-# NixOS-Anywhere Installation Guide for Low-RAM VPS (ZRAM Method)
+````markdown
+# NixOS-Anywhere Installation Guide for Low-RAM & Network-Restricted VPS (ZRAM Method)
 
-This guide provides a bulletproof workflow for installing NixOS on low-memory Virtual Private Servers (VPS), such as those with only 1GB of RAM. Standard `nixos-anywhere` installations often fail on such machines due to Out-Of-Memory (OOM) errors or garbage collection (GC) loops when transferring the system closure.
+This guide provides a bulletproof workflow for installing NixOS on low-memory Virtual Private Servers (VPS), such as those with only 1GB of RAM. It also covers workarounds for servers with restricted network access to GitHub (e.g., domestic servers in China). Standard `nixos-anywhere` installations often fail on such machines due to Out-Of-Memory (OOM) errors, garbage collection (GC) loops, or network timeouts when transferring the system closure.
 
 This workflow solves the issue by splitting the installation into phases, utilizing local computation, and creating a temporary ZRAM swap space in the Live environment.
 
-## Step 1: Preparation & SSH Key Management
+## Method 1: Standard kexec (For VPS with Good GitHub Connection)
 
-Before beginning, ensure your local machine has SSH access to the target VPS. If you are reusing an IP address from a previous server, your local SSH client will likely reject the connection due to a host key mismatch.
+_Use this method for overseas servers (e.g., in Los Angeles) that can quickly download files directly from GitHub._
 
-**Clear the old SSH record:**
+### **Step 1: Preparation & SSH Key Management**
+
+Clear the old SSH record to prevent host key mismatch errors:
 
 ```bash
 ssh-keygen -R <YOUR_VPS_IP>
 ```
+````
 
-_Explanation:_ This command removes the old cryptographic fingerprint associated with the IP address from your `~/.ssh/known_hosts` file, preventing the `REMOTE HOST IDENTIFICATION HAS CHANGED` error. Ensure your local public key is authorized on the target VPS's `root` user.
+### **Step 2: Inject NixOS Memory System (kexec phase)**
 
-## Step 2: Inject NixOS Memory System (kexec phase)
-
-The first step is to replace the existing operating system (e.g., Ubuntu/Debian) with a minimal NixOS Live environment running entirely in the server's RAM.
-
-**Execute on your local machine:**
+Replace the existing OS with a minimal NixOS Live environment running in RAM.
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- --phases kexec --flake .#<YOUR_FLAKE_HOST> root@<YOUR_VPS_IP> --no-substitute-on-destination
 ```
 
-_Explanation:_ * `--phases kexec`: Instructs the tool to *only\* load the in-memory OS and stop. It will not format disks yet.
+_(Wait 1-2 minutes for the connection to drop and the VPS to reboot into memory)._
 
-- `--no-substitute-on-destination`: **CRITICAL for low RAM.** Forces your local machine to evaluate and build the dependencies, pushing only raw binaries to the VPS. Without this, the VPS will try to resolve dependencies and instantly run out of memory.
-- _Note:_ The connection will drop automatically when the kexec is triggered. Wait 1-2 minutes for the VPS to reboot into the NixOS memory environment.
+### **Step 3: Enable ZRAM Extreme Expansion (Optional but recommended for <2GB RAM)**
 
-## Step 3: Enable ZRAM Extreme Expansion
-
-Now that the VPS is running the NixOS Live environment, we must expand its capacity to receive the full system closure without crashing.
-
-**Connect to the VPS:**
+Connect to the VPS (`ssh root@<YOUR_VPS_IP>`) and run:
 
 ```bash
-ssh root@<YOUR_VPS_IP>
-```
-
-_(If you get a host key warning again, run `ssh-keygen -R <YOUR_VPS_IP>` locally, as the OS has changed)._
-
-**Execute the following commands line by line on the VPS:**
-
-```bash
-# 1. Expand the temporary Nix store limit
 mount -o remount,size=2G /nix/.rw-store
-
-# 2. Load the ZRAM module and configure compression
 modprobe zram
 echo zstd > /sys/block/zram0/comp_algorithm
 echo 1500M > /sys/block/zram0/disksize
-
-# 3. Initialize and activate the ZRAM virtual Swap
 mkswap /dev/zram0
 swapon /dev/zram0
-
-# 4. Disconnect to prepare for final installation
 exit
 ```
 
-_Explanation:_ The default `/nix/.rw-store` is only ~500MB, which cannot hold a full system closure. We force it to 2GB, and then create 1.5GB of highly compressed memory (ZRAM) to act as a safety buffer. This prevents the Nix garbage collector from entering an infinite loop when the temporary storage fills up.
+### **Step 4: Execute Disk Formatting and Installation**
 
-## Step 4: Execute Disk Formatting and Installation
-
-With the server's memory fortified, you can safely push the final system.
-
-**Execute on your local machine:**
+Push the final system from your local machine:
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- --phases disko,install --flake .#<YOUR_FLAKE_HOST> root@<YOUR_VPS_IP> --no-substitute-on-destination
 ```
 
-_Explanation:_
+---
 
-- `--phases disko,install`: Resumes the process. It will first execute your `disko` configuration (partitioning and formatting the hard drive, e.g., to BTRFS), and then copy the system closure from your local machine to the newly formatted drive.
-- Once the process outputs `### Done! ###`, the server will automatically reboot into your newly installed NixOS.
+## Method 2: Manual kexec (For Domestic Servers with Poor GitHub Connection)
+
+_Use this method for servers in China (e.g., Aliyun, Tencent Cloud) where `nixos-anywhere` gets stuck downloading the `kexec` tarball or encounters `Scheme missing` errors._
+
+### **Step 1: Download the kexec image locally**
+
+Download the tarball to your local machine (using a proxy or a mirror).
+
+```bash
+# Example using a mirror:
+curl -L [https://mirror.ghproxy.com/https://github.com/nix-community/nixos-images/releases/download/nixos-25.05/nixos-kexec-installer-noninteractive-x86_64-linux.tar.gz](https://mirror.ghproxy.com/https://github.com/nix-community/nixos-images/releases/download/nixos-25.05/nixos-kexec-installer-noninteractive-x86_64-linux.tar.gz) -o nixos-kexec.tar.gz
+```
+
+### **Step 2: SCP the image to the VPS**
+
+Upload the file manually to bypass the server's poor download speed:
+
+```bash
+scp ./nixos-kexec.tar.gz root@<YOUR_VPS_IP>:/root/
+```
+
+### **Step 3: Trigger kexec manually via SSH**
+
+SSH into the server and execute the kexec script directly to replace the OS in memory. The SSH connection will drop immediately after running this.
+
+```bash
+ssh root@<YOUR_VPS_IP> "mkdir -p /root/kexec && tar -zxf /root/nixos-kexec.tar.gz -C /root/kexec && /root/kexec/kexec/run"
+```
+
+_(Wait 1-2 minutes, clear your local SSH known_hosts using `ssh-keygen -R <YOUR_VPS_IP>`, and optionally log back in to set up ZRAM as shown in Method 1, Step 3)._
+
+### **Step 4: Execute Disk Formatting and Installation**
+
+Once the server is running the NixOS memory environment, execute the final installation phase locally:
+
+```bash
+nix run github:nix-community/nixos-anywhere -- \
+  --flake .#<YOUR_FLAKE_HOST> \
+  --phases disko,install \
+  --no-substitute-on-destination \
+  root@<YOUR_VPS_IP>
+```
 
 ---
 
-# 低内存 VPS 上 NixOS Anywhere 安装指南 (ZRAM 方案)
+---
 
-本指南提供了一套针对低内存 VPS（如 1GB 内存）安装 NixOS 的完美工作流。在低配机器上直接运行 `nixos-anywhere` 通常会因为内存耗尽 (OOM) 或触发垃圾回收 (GC) 死循环而导致传输失败。
+# 低内存及受限网络 VPS 上 NixOS Anywhere 安装指南 (ZRAM 方案)
 
-本方案通过分步执行、利用本地算力代工，以及在内存系统中开启 ZRAM 虚拟内存，完美解决了爆内存导致安装卡死的问题。
+本指南提供了一套针对低内存 VPS（如 1GB 内存）及连接 GitHub 网络较差的机器（如国内阿里云、腾讯云）安装 NixOS 的完美工作流。在这些机器上直接运行 `nixos-anywhere` 通常会因为内存耗尽 (OOM)、触发垃圾回收 (GC) 死循环或网络下载超时而导致安装失败。
 
-## 第一步：准备工作与 SSH 密钥管理
+本方案通过分步执行、利用本地算力代工，以及在内存系统中开启 ZRAM 虚拟内存或手动推送镜像，完美解决了上述卡死问题。
 
-在开始之前，请确保你的本地电脑可以通过 SSH 免密登录目标 VPS 的 root 账户。如果你重用了一个以前使用过的 IP 地址，你的 SSH 客户端会因为主机指纹不匹配而拒绝连接。
+## 方法一：标准 kexec 流程（适用于连接 GitHub 网络良好的海外 VPS）
 
-**清除旧的 SSH 记录：**
+### **第一步：准备工作与 SSH 密钥管理**
+
+清除旧的 SSH 记录，防止指纹不匹配报错：
 
 ```bash
 ssh-keygen -R <你的VPS_IP>
 ```
 
-_原理解释：_ 此命令会从你本地的 `~/.ssh/known_hosts` 文件中删除与该 IP 绑定的旧密钥指纹，防止出现 `REMOTE HOST IDENTIFICATION HAS CHANGED` 报错。
+### **第二步：注入 NixOS 内存系统 (kexec 阶段)**
 
-## 第二步：注入 NixOS 内存系统 (kexec 阶段)
-
-此步骤会将服务器原有的系统（如 Ubuntu）干掉，并在内存 (RAM) 中拉起一个微型的 NixOS Live 环境。
-
-**在本地电脑上执行：**
+在本地电脑上执行，仅加载内存系统：
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- --phases kexec --flake .#<你的主机名> root@<你的VPS_IP> --no-substitute-on-destination
 ```
 
-_原理解释：_
+### **第三步：SSH 登录并开启 ZRAM 极限扩容（2GB 以下内存强烈建议）**
 
-- `--phases kexec`：指示工具仅执行内存系统的加载，然后停止，**不会**格式化硬盘。
-- `--no-substitute-on-destination`：**低内存机器的救命参数！** 它强制本地电脑承担所有的依赖解析和编译工作，仅将纯二进制文件推送到 VPS。如果不加此参数，VPS 会尝试自己拉取依赖，瞬间导致内存溢出崩溃。
-- _注意：_ 命令执行完毕后会自动断开连接，请等待 1-2 分钟，让服务器在内存中重启完成。
-
-## 第三步：SSH 登录并开启 ZRAM 极限扩容
-
-此时服务器已在 NixOS 内存环境中运行，我们需要扩大它的承载能力，以接收接下来庞大的系统文件。
-
-**SSH 连接到服务器：**
+登录服务器 (`ssh root@<你的VPS_IP>`) 并逐行执行：
 
 ```bash
-ssh root@<你的VPS_IP>
-```
-
-_(如果再次遇到指纹报错，请在本地重新运行 `ssh-keygen -R <你的VPS_IP>`，因为系统已经改变)。_
-
-**在服务器终端中逐行执行以下魔法指令：**
-
-```bash
-# 1. 扩容临时挂载点上限
 mount -o remount,size=2G /nix/.rw-store
-
-# 2. 挂载并配置 ZRAM 内存压缩模块
 modprobe zram
 echo zstd > /sys/block/zram0/comp_algorithm
 echo 1500M > /sys/block/zram0/disksize
-
-# 3. 初始化并激活 ZRAM 虚拟 Swap
 mkswap /dev/zram0
 swapon /dev/zram0
-
-# 4. 退出服务器，准备最后的夺舍
 exit
 ```
 
-_原理解释：_ 默认的 `/nix/.rw-store` 只有约 500MB，根本装不下完整的系统闭包。我们强制将其上限调整为 2GB，并利用 ZRAM 技术将 1.5GB 的内存转化为高压缩率的虚拟 Swap。这不仅扩大了存储，还彻底避免了因空间不足导致的 Nix GC 死循环问题。
+### **第四步：执行硬盘分区与系统安装**
 
-## 第四步：执行硬盘分区与系统安装
-
-服务器已经武装完毕，现在可以安全地推送完整的系统了。
-
-**回到本地电脑上执行：**
+回到本地电脑上执行最后的推送与安装：
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- --phases disko,install --flake .#<你的主机名> root@<你的VPS_IP> --no-substitute-on-destination
 ```
 
-_原理解释：_
+---
 
-- `--phases disko,install`：恢复安装流程。它会先根据你的 `disko` 配置无情地格式化硬盘（例如切分为 BTRFS），然后将本地准备好的纯净系统直接灌入新硬盘中。
-- 当终端输出 `### Done! ###` 时，表明系统引导已成功写入，服务器将自动重启进入你全新安装的 NixOS。
+## 方法二：手动 kexec 流程（适用于国内云服务器等连接 GitHub 极慢的 VPS）
+
+_当自动化工具在 `Downloading kexec tarball...` 卡死，或尝试使用本地路径报错 `Scheme missing` 时，请使用此手动“夺舍”方案。_
+
+### **第一步：在本地下载 kexec 镜像文件**
+
+利用你本地的网络（或加速站）将镜像下载到本地目录：
+
+```bash
+curl -L [https://mirror.ghproxy.com/https://github.com/nix-community/nixos-images/releases/download/nixos-25.05/nixos-kexec-installer-noninteractive-x86_64-linux.tar.gz](https://mirror.ghproxy.com/https://github.com/nix-community/nixos-images/releases/download/nixos-25.05/nixos-kexec-installer-noninteractive-x86_64-linux.tar.gz) -o nixos-kexec.tar.gz
+```
+
+### **第二步：通过 SCP 将镜像手动推送到服务器**
+
+将下载好的系统镜像直接推送到国内服务器的 `/root` 目录下，彻底避开服务器端 wget 的网络波动：
+
+```bash
+scp ./nixos-kexec.tar.gz root@<你的VPS_IP>:/root/
+```
+
+### **第三步：SSH 登录并手动触发 kexec (夺舍)**
+
+一条命令完成解压并触发内核替换。执行后 SSH 连接会立刻断开，表明服务器正在内存中重启进入 NixOS Live 环境：
+
+```bash
+ssh root@<你的VPS_IP> "mkdir -p /root/kexec && tar -zxf /root/nixos-kexec.tar.gz -C /root/kexec && /root/kexec/kexec/run"
+```
+
+_（等待 1-2 分钟，执行 `ssh-keygen -R <你的VPS_IP>` 清除旧指纹。如果内存较小，可此时登录进去执行 方法一、第三步 的 ZRAM 扩容指令）。_
+
+### **第四步：执行硬盘分区与系统安装**
+
+在本地执行安装指令，跳过 kexec 阶段，直接开始执行 disko 分区和系统闭包拷贝：
+
+```bash
+nix run github:nix-community/nixos-anywhere -- \
+  --flake .#<你的主机名> \
+  --phases disko,install \
+  --no-substitute-on-destination \
+  root@<你的VPS_IP>
+```
+
+```
+
+```
