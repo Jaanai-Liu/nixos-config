@@ -6,6 +6,11 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    # ==========================================
+    # zsh ~/.zshrc mv to ~/.config/zsh
+    # ==========================================
+    dotDir = ".config/zsh";
+
     oh-my-zsh = {
       enable = true;
       # theme = "robbyrussell";
