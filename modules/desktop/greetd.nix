@@ -7,7 +7,6 @@
 {
   security.pam.services.greetd.enableGnomeKeyring = true;
   services.displayManager.gdm.enable = false;
-
   services.gnome.gnome-keyring.enable = true;
 
   # services.greetd = {
@@ -38,7 +37,9 @@
         #   "--cmd /home/${myvars.username}/.wayland-session"
         #   "--theme 'border=magenta;text=cyan;prompt=green;time=yellow'"
         # ];
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd /home/${myvars.username}/.wayland-session"; # start wayland session with a TUI login manager
+
+        # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd /home/${myvars.username}/.wayland-session"; # start wayland session with a TUI login manager
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd /home/${myvars.username}/.wayland-session"; # start wayland session with a TUI login manager
       };
     };
   };
