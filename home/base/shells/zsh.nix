@@ -9,7 +9,8 @@
     # ==========================================
     # zsh ~/.zshrc mv to ~/.config/zsh
     # ==========================================
-    dotDir = ".config/zsh";
+    # dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     oh-my-zsh = {
       enable = true;
