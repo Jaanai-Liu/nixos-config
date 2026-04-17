@@ -24,8 +24,8 @@
     enable = true;
     settings = {
       default_session = {
-        # user = "greeter";
-        user = myvars.username;
+        user = "greeter";
+        # user = myvars.username;
 
         # command = "/home/${myvars.username}/.wayland-session";
         # command = lib.concatStringsSep " " [
@@ -38,7 +38,7 @@
         #   "--cmd /home/${myvars.username}/.wayland-session"
         #   "--theme 'border=magenta;text=cyan;prompt=green;time=yellow'"
         # ];
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd $HOME/.wayland-session"; # start wayland session with a TUI login manager
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd /home/${myvars.username}/.wayland-session"; # start wayland session with a TUI login manager
       };
     };
   };
