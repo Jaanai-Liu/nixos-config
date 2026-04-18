@@ -51,6 +51,14 @@ in
       # preserve davfs2 driver's cache to avoid large memory usage
       "/var/cache/davfs2"
 
+      # tuigreet login remember
+      {
+        directory = "/var/cache/tuigreet";
+        user = "greeter";
+        group = "greeter";
+        mode = "0755";
+      }
+
       "/var/lib/nixos"
       "/var/lib/systemd"
       {

@@ -21,6 +21,12 @@
   #   ];
   # };
 
+  # security.pam.services.noctalia = { };
+  security.pam.services.noctalia = {
+    enableGnomeKeyring = false;
+    fprintAuth = false;
+  };
+
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.niri = { };
 
@@ -50,11 +56,4 @@
   };
 
   # programs.fuse.userAllowOther = true;
-
-  security.wrappers.quickshell = {
-    setuid = true;
-    owner = "root";
-    group = "root";
-    source = "${pkgs.quickshell}/bin/quickshell"; # 如果报错说找不到包，可能要改成你的 input 路径
-  };
 }

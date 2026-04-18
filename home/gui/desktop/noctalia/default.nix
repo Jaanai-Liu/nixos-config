@@ -6,8 +6,8 @@
   ...
 }:
 let
-  noctalia-pkg = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  # package = pkgs.noctalia-shell;
+  # noctalia-pkg = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  noctalia-pkg = pkgs.noctalia-shell;
 in
 {
   home.packages = [
@@ -33,6 +33,10 @@ in
       "qt6ct/qt6ct.conf".source = mkSymlink "${confPath}/qt6ct.conf";
     };
 
+  home.sessionVariables = {
+    NOCTALIA_PAM_SERVICE = "noctalia";
+  };
+
   systemd.user.services.noctalia-shell = {
     Unit = {
       Description = "Noctalia Shell - Wayland desktop shell";
@@ -42,14 +46,16 @@ in
     };
 
     Service = {
-      # ExecStart = "${pkgs.lib.getExe noctalia-pkg}";
-      ExecStart = "lib.getExe noctalia-pkg";
+      ExecStart = "${pkgs.lib.getExe noctalia-pkg}";
+      # ExecStart = "lib.getExe noctalia-pkg";
       Restart = "on-failure";
 
       Environment = [
         "QT_QPA_PLATFORM=wayland;xcb"
         "QT_QPA_PLATFORMTHEME=qt6ct"
         "QT_AUTO_SCREEN_SCALE_FACTOR=1"
+
+        "NOCTALIA_PAM_SERVICE=noctalia"
       ];
     };
 
